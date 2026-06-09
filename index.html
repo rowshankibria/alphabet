@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Words, One at a Time</title>
+
+<!-- Lets the page be saved to the iPad Home Screen and open full-screen -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="My Words" />
+<meta name="theme-color" content="#EAF1F6" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:        #EAF1F6;
+    --bg-top:    #F3F8FB;
+    --card:      #FFFFFF;
+    --ink:       #2B3242;
+    --muted:     #79899B;
+    --amber:     #F59E0B;
+    --amber-ink: #7A4A06;
+    --amber-soft:#FDEBC8;
+    --teal:      #12B3A2;
+    --teal-soft: #D2F2EE;
+    --teal-ink:  #0A6F64;
+    --tile-rest: #F4F7FA;
+    --tile-edge: #E2EAF1;
+    --shadow:    0 10px 30px rgba(43,50,66,.10);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: "Nunito", system-ui, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(180deg, var(--bg-top), var(--bg));
+    min-height: 100vh; min-height: 100dvh;
+    padding: clamp(16px, 4vw, 40px);
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  header {
+    width: 100%; max-width: 720px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin-bottom: clamp(16px, 3vh, 28px);
+  }
+  .brand {
+    font-family: "Fredoka", sans-serif; font-weight: 600;
+    font-size: clamp(20px, 3.4vw, 28px);
+  }
+  .brand .dot { color: var(--amber); }
+
+  .progress {
+    font-weight: 800; color: var(--muted);
+    font-size: clamp(14px, 2.4vw, 17px);
+    background: #fff; border-radius: 999px;
+    padding: 8px 16px; box-shadow: var(--shadow);
+  }
+
+  main { width: 100%; max-width: 720px; flex: 1;
+         display: flex; flex-direction: column; }
+
+  .card {
+    background: var(--card); border-radius: 28px; box-shadow: var(--shadow);
+    padding: clamp(24px, 5vw, 48px); text-align: center;
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .word {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: clamp(6px, 1.4vw, 12px);
+    cursor: pointer; user-select: none;
+    margin: 0 auto; padding: 4px; border: none; background: none;
+  }
+  .syl {
+    font-family: "Fredoka", sans-serif; font-weight: 600;
+    font-size: clamp(46px, 13vw, 100px); line-height: 1;
+    color: var(--ink); background: var(--tile-rest);
+    border: 2px solid var(--tile-edge); border-radius: 18px;
+    padding: clamp(10px, 2.2vw, 22px) clamp(14px, 3vw, 28px);
+    transition: transform .18s ease, background .18s ease,
+                color .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .syl.active {
+    background: var(--amber); border-color: var(--amber); color: #fff;
+    transform: translateY(-6px) scale(1.06);
+    box-shadow: 0 12px 24px rgba(245,158,11,.40);
+  }
+  .syl.done { background: var(--amber-soft); border-color: var(--amber-soft); color: var(--amber-ink); }
+
+  .sound-row {
+    margin-top: clamp(18px, 3vh, 30px);
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  }
+  button.action {
+    font-family: "Nunito", sans-serif; font-weight: 800;
+    font-size: clamp(15px, 2.6vw, 18px);
+    border: none; border-radius: 999px; padding: 14px 24px; cursor: pointer;
+    transition: transform .12s ease, opacity .2s ease;
+  }
+  button.action:active { transform: scale(.96); }
+  button.action:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  button.action[disabled] { opacity: .45; cursor: default; }
+  .syllables-btn { background: var(--amber); color: #fff; }
+  .whole-btn { background: var(--teal-soft); color: var(--teal-ink); }
+
+  .build-hint {
+    margin-top: clamp(16px, 2.8vh, 26px);
+    font-weight: 700; color: var(--teal);
+    font-size: clamp(14px, 2.3vw, 17px);
+  }
+  .finished {
+    margin-top: clamp(16px, 2.8vh, 26px);
+    font-weight: 800; color: var(--amber-ink);
+    font-size: clamp(15px, 2.5vw, 18px);
+    display: none;
+  }
+
+  /* Bottom navigation */
+  .nav {
+    width: 100%; max-width: 720px;
+    margin-top: clamp(18px, 3vh, 28px);
+    display: flex; align-items: center; gap: 12px;
+  }
+  button.nav-btn {
+    font-family: "Nunito", sans-serif; font-weight: 800;
+    border: none; border-radius: 18px; cursor: pointer;
+    transition: transform .12s ease, opacity .2s ease;
+    box-shadow: var(--shadow);
+  }
+  button.nav-btn:active { transform: scale(.97); }
+  button.nav-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  button.nav-btn[disabled] { opacity: .4; cursor: default; box-shadow: none; }
+
+  .back-btn  { background: #fff; color: var(--ink);
+               font-size: clamp(15px, 2.4vw, 18px); padding: 16px 20px; }
+  .next-btn  { background: var(--ink); color: #fff; flex: 1;
+               font-size: clamp(18px, 3vw, 22px); padding: 18px 20px; }
+  .reset-btn { background: #fff; color: var(--muted);
+               font-size: clamp(13px, 2vw, 15px); padding: 16px 18px; }
+
+  .nospeech {
+    display: none; background: #FFF3F0; color: #B23A1B;
+    border-radius: 14px; padding: 12px 16px; font-weight: 700;
+    font-size: 14px; margin-bottom: 16px; text-align: center;
+    max-width: 720px; width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .syl, button.action, button.nav-btn { transition: none; }
+    .syl.active { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="nospeech" id="nospeech">
+    This iPad can't play the word sounds right now. He can still read the word and build it.
+  </div>
+
+  <header>
+    <div class="brand">My Words<span class="dot">.</span></div>
+    <div class="progress" id="progress">&nbsp;</div>
+  </header>
+
+  <main>
+    <section class="card">
+      <button class="word" id="word" aria-label="Hear the syllables"></button>
+
+      <div class="sound-row">
+        <button class="action syllables-btn" id="sylBtn">🔊 Hear syllables</button>
+        <button class="action whole-btn" id="wholeBtn">🗣️ Say the whole word</button>
+      </div>
+
+      <div class="build-hint" id="buildHint">Now build it with your letters 🧲</div>
+      <div class="finished" id="finished">🎉 That's the last word! Tap Start over to go again.</div>
+    </section>
+  </main>
+
+  <nav class="nav">
+    <button class="nav-btn back-btn"  id="backBtn">◀ Back</button>
+    <button class="nav-btn next-btn"  id="nextBtn">Next ▶</button>
+    <button class="nav-btn reset-btn" id="resetBtn">↺ Start over</button>
+  </nav>
+
+<script>
+/* =========================================================================
+   PARENT SECTION — THIS IS THE ONLY PART YOU EDIT
+   -------------------------------------------------------------------------
+   Put the words in the ORDER you want him to go through them. He sees one
+   word at a time and taps "Next" to move forward. Each iPad remembers its
+   own place, so a brand-new iPad always starts at the first word below.
+
+   For each word, split it into syllables yourself — the page reads and
+   highlights them in that order.
+
+   Splitting examples:
+     apple    -> ["ap", "ple"]
+     rabbit   -> ["rab", "bit"]
+     sunflower-> ["sun", "flow", "er"]
+     banana   -> ["ba", "na", "na"]
+   ========================================================================= */
+
+   const WORDS = [
+     { text: "apple",     syllables: ["ap", "ple"] },
+     { text: "ball",      syllables: ["ball"] },
+     { text: "cat",       syllables: ["cat"] },
+     { text: "doctor",    syllables: ["doc", "tor"] },
+     { text: "elephant",  syllables: ["el", "e", "phant"] },
+     { text: "flower",    syllables: ["flow", "er"] }
+   ];
+
+/* =========================================================================
+   END OF PARENT SECTION — nothing below needs changing.
+   ========================================================================= */
+
+  const STORE_KEY = "mywords.index.v1";
+
+  // Save/read position per device. Wrapped so it degrades gracefully if a
+  // browser blocks storage (falls back to memory for that session).
+  let memoryIndex = 0;
+  function loadIndex() {
+    try {
+      const v = window.localStorage.getItem(STORE_KEY);
+      if (v === null) return 0;
+      const n = parseInt(v, 10);
+      return isNaN(n) ? 0 : n;
+    } catch (e) { return memoryIndex; }
+  }
+  function saveIndex(i) {
+    memoryIndex = i;
+    try { window.localStorage.setItem(STORE_KEY, String(i)); } catch (e) {}
+  }
+
+  let index = Math.min(Math.max(loadIndex(), 0), Math.max(WORDS.length - 1, 0));
+
+  // ---- Speech -------------------------------------------------------------
+  const synth = window.speechSynthesis;
+  let chosenVoice = null, busy = false;
+
+  function pickVoice() {
+    if (!synth) return;
+    const voices = synth.getVoices() || [];
+    chosenVoice =
+      voices.find(v => /en[-_]US/i.test(v.lang) && /female|samantha|karen|moira/i.test(v.name)) ||
+      voices.find(v => /en[-_]US/i.test(v.lang)) ||
+      voices.find(v => /^en/i.test(v.lang)) || voices[0] || null;
+  }
+  if (synth) { pickVoice(); synth.onvoiceschanged = pickVoice; }
+  else { document.getElementById("nospeech").style.display = "block"; }
+
+  function speakSequence(pieces, rate, onStep, onDone) {
+    if (!synth) { onStep(-1); onDone(); return; }
+    synth.cancel();
+    let i = 0;
+    (function next() {
+      if (i >= pieces.length) { onStep(-1); onDone(); return; }
+      onStep(i);
+      const u = new SpeechSynthesisUtterance(pieces[i]);
+      if (chosenVoice) u.voice = chosenVoice;
+      u.lang = (chosenVoice && chosenVoice.lang) || "en-US";
+      u.rate = rate; u.pitch = 1;
+      let advanced = false;
+      const advance = () => { if (advanced) return; advanced = true; i++; next(); };
+      u.onend = advance; u.onerror = advance;
+      setTimeout(advance, Math.max(650, pieces[i].length * 130) + 500);
+      synth.speak(u);
+    })();
+  }
+
+  // ---- DOM ----------------------------------------------------------------
+  const wordEl     = document.getElementById("word");
+  const progressEl = document.getElementById("progress");
+  const sylBtn     = document.getElementById("sylBtn");
+  const wholeBtn   = document.getElementById("wholeBtn");
+  const buildHint  = document.getElementById("buildHint");
+  const finishedEl = document.getElementById("finished");
+  const backBtn    = document.getElementById("backBtn");
+  const nextBtn    = document.getElementById("nextBtn");
+  const resetBtn   = document.getElementById("resetBtn");
+
+  let tiles = [];
+
+  function render() {
+    const word = WORDS[index];
+    progressEl.textContent = (index + 1) + " / " + WORDS.length;
+
+    wordEl.innerHTML = "";
+    tiles = word.syllables.map(syl => {
+      const span = document.createElement("span");
+      span.className = "syl";
+      span.textContent = syl;
+      wordEl.appendChild(span);
+      return span;
+    });
+    wordEl.setAttribute("aria-label", "Hear the syllables of " + word.text);
+
+    backBtn.disabled = (index === 0);
+    const isLast = (index === WORDS.length - 1);
+    nextBtn.disabled = isLast;
+    nextBtn.textContent = isLast ? "Done" : "Next ▶";
+    finishedEl.style.display = isLast ? "block" : "none";
+  }
+
+  function clearTiles() { tiles.forEach(t => t.classList.remove("active", "done")); }
+  function setBusy(state) { busy = state; sylBtn.disabled = state; wholeBtn.disabled = state; }
+
+  function playSyllables() {
+    if (busy) return;
+    setBusy(true); clearTiles();
+    speakSequence(
+      WORDS[index].syllables, 0.75,
+      (idx) => tiles.forEach((t, k) => {
+        t.classList.toggle("active", k === idx);
+        if (idx !== -1 && k < idx) t.classList.add("done");
+      }),
+      () => { tiles.forEach(t => t.classList.add("done")); setBusy(false); }
+    );
+  }
+
+  function playWhole() {
+    if (busy) return;
+    setBusy(true);
+    tiles.forEach(t => { t.classList.remove("done"); t.classList.add("active"); });
+    speakSequence(
+      [WORDS[index].text], 0.85,
+      () => {},
+      () => { tiles.forEach(t => t.classList.remove("active")); setBusy(false); }
+    );
+  }
+
+  function go(delta) {
+    const ni = Math.min(Math.max(index + delta, 0), WORDS.length - 1);
+    if (ni === index) return;
+    index = ni; saveIndex(index);
+    if (synth) synth.cancel();
+    busy = false;
+    render();
+  }
+
+  function startOver() {
+    index = 0; saveIndex(0);
+    if (synth) synth.cancel();
+    busy = false;
+    render();
+  }
+
+  wordEl.addEventListener("click", playSyllables);
+  sylBtn.addEventListener("click", playSyllables);
+  wholeBtn.addEventListener("click", playWhole);
+  backBtn.addEventListener("click", () => go(-1));
+  nextBtn.addEventListener("click", () => go(1));
+  resetBtn.addEventListener("click", startOver);
+
+  if (WORDS.length === 0) {
+    document.querySelector("main").innerHTML =
+      '<section class="card"><p style="font-weight:700;color:#79899B;">Add words to the WORDS list at the top of this file.</p></section>';
+    document.querySelector(".nav").style.display = "none";
+  } else {
+    render();
+  }
+</script>
+</body>
+</html>
