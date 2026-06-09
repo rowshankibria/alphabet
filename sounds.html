@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Letter Sounds</title>
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Letter Sounds" />
+<meta name="theme-color" content="#EAF1F6" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:#EAF1F6; --bg-top:#F3F8FB; --card:#FFFFFF;
+    --ink:#2B3242; --muted:#79899B;
+    --amber:#F59E0B; --amber-ink:#7A4A06; --amber-soft:#FDEBC8;
+    --teal:#12B3A2; --teal-soft:#D2F2EE; --teal-ink:#0A6F64;
+    --tile-rest:#F4F7FA; --tile-edge:#E2EAF1;
+    --shadow:0 10px 30px rgba(43,50,66,.10);
+  }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { margin:0; padding:0; }
+  body {
+    font-family:"Nunito",system-ui,sans-serif; color:var(--ink);
+    background:linear-gradient(180deg,var(--bg-top),var(--bg));
+    min-height:100vh; min-height:100dvh; padding:clamp(16px,4vw,40px);
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .wrap { width:100%; max-width:860px; }
+  header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:clamp(10px,2vh,18px); }
+  .brand { font-family:"Fredoka",sans-serif; font-weight:600; font-size:clamp(20px,3.4vw,28px); }
+  .brand .dot { color:var(--amber); }
+  .page-link {
+    font-weight:800; font-size:clamp(13px,2.3vw,15px); text-decoration:none;
+    color:var(--ink); background:#fff; border-radius:999px; padding:9px 16px; box-shadow:var(--shadow);
+  }
+  .intro { color:var(--muted); font-weight:700; font-size:clamp(14px,2.4vw,16px); margin:0 0 clamp(14px,2.6vh,22px); line-height:1.5; }
+
+  .legend { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:clamp(14px,2.6vh,20px); }
+  .legend span { display:inline-flex; align-items:center; gap:7px; font-weight:800; font-size:13px; color:var(--muted); }
+  .dot-v { width:14px; height:14px; border-radius:50%; background:var(--amber); }
+  .dot-c { width:14px; height:14px; border-radius:50%; background:var(--teal); }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:clamp(10px,2vw,16px); }
+
+  .lcard {
+    background:var(--card); border-radius:22px; box-shadow:var(--shadow);
+    padding:clamp(14px,2.6vw,20px); text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    border-top:5px solid var(--teal);
+  }
+  .lcard.vowel { border-top-color:var(--amber); }
+
+  .letter-btn {
+    border:none; background:none; cursor:pointer; padding:4px 8px; border-radius:16px;
+    font-family:"Fredoka",sans-serif; font-weight:700; line-height:1; color:var(--ink);
+    font-size:clamp(40px,9vw,58px); transition:transform .12s ease, background .18s ease, color .18s ease;
+  }
+  .letter-btn:active { transform:scale(.95); }
+  .letter-btn.speaking { background:var(--amber); color:#fff; }
+  .lcard.vowel .letter-btn.speaking { background:var(--amber); }
+  .lcard:not(.vowel) .letter-btn.speaking { background:var(--teal); }
+  .letter-btn:focus-visible { outline:3px solid var(--ink); outline-offset:2px; }
+
+  .keyword { font-weight:800; font-size:clamp(15px,2.6vw,17px); }
+  .keyword .emoji { font-size:1.25em; margin-right:4px; }
+
+  .mini-row { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  button.mini {
+    font-family:"Nunito",sans-serif; font-weight:800; font-size:13px; border:none;
+    border-radius:999px; padding:9px 14px; cursor:pointer; transition:transform .12s ease, opacity .2s ease;
+  }
+  button.mini:active { transform:scale(.95); }
+  button.mini:focus-visible { outline:3px solid var(--ink); outline-offset:2px; }
+  button.mini[disabled] { opacity:.45; cursor:default; }
+  .sound-btn { background:var(--amber); color:#fff; }
+  .word-btn { background:var(--teal-soft); color:var(--teal-ink); }
+
+  .note {
+    margin-top:clamp(18px,3vh,28px); background:#fff; border-radius:18px; box-shadow:var(--shadow);
+    padding:clamp(16px,3vw,24px); color:var(--ink);
+  }
+  .note h2 { font-family:"Fredoka",sans-serif; font-weight:600; font-size:18px; margin:0 0 8px; }
+  .note p { margin:0 0 10px; font-weight:600; color:var(--muted); line-height:1.55; font-size:14px; }
+  .note p:last-child { margin-bottom:0; }
+
+  .nospeech {
+    display:none; background:#FFF3F0; color:#B23A1B; border-radius:14px; padding:12px 16px;
+    font-weight:700; font-size:14px; margin-bottom:16px; text-align:center;
+  }
+  @media (prefers-reduced-motion: reduce) { .letter-btn, button.mini { transition:none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="nospeech" id="nospeech">This iPad can't play sound right now. The letters and words still show.</div>
+
+  <header>
+    <div class="brand">Letter Sounds<span class="dot">.</span></div>
+    <a class="page-link" href="index.html">← Daily Words</a>
+  </header>
+
+  <p class="intro">Tap a letter to hear its name, a word, and its sound — the way it's taught in school. Then say it together and build the word with the magnets.</p>
+
+  <div class="legend">
+    <span><span class="dot-v"></span> Vowel (a, e, i, o, u)</span>
+    <span><span class="dot-c"></span> Consonant</span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="note">
+    <h2>For grown-ups</h2>
+    <p>This follows how US classrooms teach early reading (phonics): the child links each letter to a sound and a keyword — "A… apple… /a/". Vowels (a, e, i, o, u) are marked in amber because they behave differently and matter most for sounding out words.</p>
+    <p>Honest limit: the iPad voice can't make a perfectly crisp sound for letters like b, d, k, p, t — it adds a small "uh" ("buh" instead of a clean /b/). Use the <strong>word</strong> button as the reliable anchor, and model the clean sound yourself when you can. Picking a high-quality voice in Settings → Accessibility → Spoken Content → Voices → English helps.</p>
+  </div>
+
+</div>
+
+<script>
+  // letter, sound spelling for the iPad, keyword, emoji, isVowel
+  const SOUNDS = [
+    ["A","ah","apple","🍎",true],
+    ["B","buh","ball","⚽",false],
+    ["C","kuh","cat","🐱",false],
+    ["D","duh","dog","🐶",false],
+    ["E","eh","egg","🥚",true],
+    ["F","ffff","fish","🐟",false],
+    ["G","guh","goat","🐐",false],
+    ["H","huh","hat","🎩",false],
+    ["I","ih","igloo","❄️",true],
+    ["J","juh","jam","🍓",false],
+    ["K","kuh","key","🔑",false],
+    ["L","llll","leaf","🍃",false],
+    ["M","mmmm","moon","🌙",false],
+    ["N","nnnn","net","🥅",false],
+    ["O","ah","octopus","🐙",true],
+    ["P","puh","pig","🐷",false],
+    ["Q","kwuh","queen","👑",false],
+    ["R","rrr","rabbit","🐰",false],
+    ["S","ssss","sun","☀️",false],
+    ["T","tuh","turtle","🐢",false],
+    ["U","uh","umbrella","☂️",true],
+    ["V","vvvv","van","🚐",false],
+    ["W","wuh","web","🕸️",false],
+    ["X","kss","fox","🦊",false],
+    ["Y","yuh","yo-yo","🪀",false],
+    ["Z","zzzz","zebra","🦓",false]
+  ];
+
+  const synth = window.speechSynthesis;
+  let chosenVoice = null, busy = false;
+  function pickVoice() {
+    if (!synth) return;
+    const v = synth.getVoices() || [];
+    chosenVoice =
+      v.find(x => /en[-_]US/i.test(x.lang) && /female|samantha|karen|moira/i.test(x.name)) ||
+      v.find(x => /en[-_]US/i.test(x.lang)) || v.find(x => /^en/i.test(x.lang)) || v[0] || null;
+  }
+  if (synth) { pickVoice(); synth.onvoiceschanged = pickVoice; }
+  else { document.getElementById("nospeech").style.display = "block"; }
+
+  function speakSequence(pieces, rate, onDone) {
+    if (!synth) { onDone(); return; }
+    synth.cancel();
+    let i = 0;
+    (function next() {
+      if (i >= pieces.length) { onDone(); return; }
+      const u = new SpeechSynthesisUtterance(pieces[i]);
+      if (chosenVoice) u.voice = chosenVoice;
+      u.lang = (chosenVoice && chosenVoice.lang) || "en-US";
+      u.rate = rate; u.pitch = 1;
+      let done = false;
+      const adv = () => { if (done) return; done = true; i++; next(); };
+      u.onend = adv; u.onerror = adv;
+      setTimeout(adv, Math.max(600, pieces[i].length * 130) + 450);
+      synth.speak(u);
+    })();
+  }
+  function setBusy(s) { busy = s; document.querySelectorAll("button.mini").forEach(b => b.disabled = s); }
+
+  const grid = document.getElementById("grid");
+  SOUNDS.forEach(([letter, sound, word, emoji, vowel]) => {
+    const card = document.createElement("div");
+    card.className = "lcard" + (vowel ? " vowel" : "");
+
+    const lbtn = document.createElement("button");
+    lbtn.className = "letter-btn";
+    lbtn.textContent = letter + letter.toLowerCase(); // "Aa"
+    lbtn.setAttribute("aria-label", "Hear letter " + letter + ", " + word + ", and its sound");
+
+    const kw = document.createElement("div");
+    kw.className = "keyword";
+    kw.innerHTML = '<span class="emoji">' + emoji + '</span>' + word;
+
+    const row = document.createElement("div");
+    row.className = "mini-row";
+    const sBtn = document.createElement("button");
+    sBtn.className = "mini sound-btn"; sBtn.textContent = "🔊 Sound";
+    const wBtn = document.createElement("button");
+    wBtn.className = "mini word-btn"; wBtn.textContent = "🗣️ Word";
+    row.appendChild(sBtn); row.appendChild(wBtn);
+
+    function speakTriad() {           // Letter name -> word -> sound
+      if (busy) return; setBusy(true); lbtn.classList.add("speaking");
+      speakSequence([letter, word, sound], 0.8, () => { lbtn.classList.remove("speaking"); setBusy(false); });
+    }
+    function speakSound() {
+      if (busy) return; setBusy(true);
+      speakSequence([sound], 0.7, () => setBusy(false));
+    }
+    function speakWord() {
+      if (busy) return; setBusy(true);
+      speakSequence([word], 0.85, () => setBusy(false));
+    }
+    lbtn.addEventListener("click", speakTriad);
+    sBtn.addEventListener("click", speakSound);
+    wBtn.addEventListener("click", speakWord);
+
+    card.appendChild(lbtn); card.appendChild(kw); card.appendChild(row);
+    grid.appendChild(card);
+  });
+</script>
+</body>
+</html>
