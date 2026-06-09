@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Words, One at a Time</title>
+<title>Alphabet Words</title>
 
-<!-- Lets the page be saved to the iPad Home Screen and open full-screen -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="My Words" />
@@ -17,151 +16,105 @@
 
 <style>
   :root {
-    --bg:        #EAF1F6;
-    --bg-top:    #F3F8FB;
-    --card:      #FFFFFF;
-    --ink:       #2B3242;
-    --muted:     #79899B;
-    --amber:     #F59E0B;
-    --amber-ink: #7A4A06;
-    --amber-soft:#FDEBC8;
-    --teal:      #12B3A2;
-    --teal-soft: #D2F2EE;
-    --teal-ink:  #0A6F64;
-    --tile-rest: #F4F7FA;
-    --tile-edge: #E2EAF1;
-    --shadow:    0 10px 30px rgba(43,50,66,.10);
+    --bg:#EAF1F6; --bg-top:#F3F8FB; --card:#FFFFFF;
+    --ink:#2B3242; --muted:#79899B;
+    --amber:#F59E0B; --amber-ink:#7A4A06; --amber-soft:#FDEBC8;
+    --teal:#12B3A2; --teal-soft:#D2F2EE; --teal-ink:#0A6F64;
+    --tile-rest:#F4F7FA; --tile-edge:#E2EAF1;
+    --shadow:0 10px 30px rgba(43,50,66,.10);
   }
-
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body { margin: 0; padding: 0; }
-
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { margin:0; padding:0; }
   body {
-    font-family: "Nunito", system-ui, sans-serif;
-    color: var(--ink);
-    background: linear-gradient(180deg, var(--bg-top), var(--bg));
-    min-height: 100vh; min-height: 100dvh;
-    padding: clamp(16px, 4vw, 40px);
-    display: flex; flex-direction: column; align-items: center;
+    font-family:"Nunito",system-ui,sans-serif; color:var(--ink);
+    background:linear-gradient(180deg,var(--bg-top),var(--bg));
+    min-height:100vh; min-height:100dvh; padding:clamp(16px,4vw,40px);
+    display:flex; flex-direction:column; align-items:center;
   }
-
   header {
-    width: 100%; max-width: 720px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; margin-bottom: clamp(16px, 3vh, 28px);
+    width:100%; max-width:720px; display:flex; align-items:center;
+    justify-content:space-between; gap:12px; margin-bottom:clamp(12px,2.2vh,20px);
   }
-  .brand {
-    font-family: "Fredoka", sans-serif; font-weight: 600;
-    font-size: clamp(20px, 3.4vw, 28px);
-  }
-  .brand .dot { color: var(--amber); }
-
+  .brand { font-family:"Fredoka",sans-serif; font-weight:600; font-size:clamp(20px,3.4vw,28px); }
+  .brand .dot { color:var(--amber); }
   .progress {
-    font-weight: 800; color: var(--muted);
-    font-size: clamp(14px, 2.4vw, 17px);
-    background: #fff; border-radius: 999px;
-    padding: 8px 16px; box-shadow: var(--shadow);
+    font-weight:800; color:var(--muted); font-size:clamp(13px,2.3vw,16px);
+    background:#fff; border-radius:999px; padding:8px 16px; box-shadow:var(--shadow);
   }
-
-  main { width: 100%; max-width: 720px; flex: 1;
-         display: flex; flex-direction: column; }
+  main { width:100%; max-width:720px; flex:1; display:flex; flex-direction:column; gap:clamp(14px,2.4vh,22px); }
 
   .card {
-    background: var(--card); border-radius: 28px; box-shadow: var(--shadow);
-    padding: clamp(24px, 5vw, 48px); text-align: center;
-    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    background:var(--card); border-radius:26px; box-shadow:var(--shadow);
+    padding:clamp(18px,3.4vw,30px); text-align:center;
+    display:flex; flex-direction:column; align-items:center;
   }
-
+  .card-top { display:flex; align-items:center; gap:12px; margin-bottom:clamp(12px,2vh,18px); }
+  .letter-badge {
+    font-family:"Fredoka",sans-serif; font-weight:700;
+    height:clamp(44px,8vw,58px); min-width:clamp(64px,13vw,86px); padding:0 12px;
+    border-radius:16px; display:flex; align-items:center; justify-content:center;
+    font-size:clamp(24px,5vw,34px); color:#fff; background:var(--teal); letter-spacing:.04em;
+    box-shadow:0 8px 18px rgba(18,179,162,.30);
+  }
+  .syl-tag {
+    font-weight:800; font-size:clamp(11px,2vw,13px); text-transform:uppercase; letter-spacing:.1em;
+    color:var(--muted); background:var(--tile-rest); border-radius:999px; padding:6px 12px;
+  }
   .word {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: clamp(6px, 1.4vw, 12px);
-    cursor: pointer; user-select: none;
-    margin: 0 auto; padding: 4px; border: none; background: none;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(5px,1.2vw,10px);
+    cursor:pointer; user-select:none; margin:0 auto; padding:4px; border:none; background:none;
   }
   .syl {
-    font-family: "Fredoka", sans-serif; font-weight: 600;
-    font-size: clamp(46px, 13vw, 100px); line-height: 1;
-    color: var(--ink); background: var(--tile-rest);
-    border: 2px solid var(--tile-edge); border-radius: 18px;
-    padding: clamp(10px, 2.2vw, 22px) clamp(14px, 3vw, 28px);
-    transition: transform .18s ease, background .18s ease,
-                color .18s ease, box-shadow .18s ease, border-color .18s ease;
+    font-family:"Fredoka",sans-serif; font-weight:600;
+    font-size:clamp(36px,9vw,68px); line-height:1; color:var(--ink);
+    background:var(--tile-rest); border:2px solid var(--tile-edge); border-radius:16px;
+    padding:clamp(8px,1.8vw,16px) clamp(12px,2.4vw,22px);
+    transition:transform .18s ease, background .18s ease, color .18s ease,
+               box-shadow .18s ease, border-color .18s ease;
   }
   .syl.active {
-    background: var(--amber); border-color: var(--amber); color: #fff;
-    transform: translateY(-6px) scale(1.06);
-    box-shadow: 0 12px 24px rgba(245,158,11,.40);
+    background:var(--amber); border-color:var(--amber); color:#fff;
+    transform:translateY(-5px) scale(1.05); box-shadow:0 12px 24px rgba(245,158,11,.40);
   }
-  .syl.done { background: var(--amber-soft); border-color: var(--amber-soft); color: var(--amber-ink); }
-
-  .sound-row {
-    margin-top: clamp(18px, 3vh, 30px);
-    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
-  }
+  .syl.done { background:var(--amber-soft); border-color:var(--amber-soft); color:var(--amber-ink); }
+  .sound-row { margin-top:clamp(14px,2.4vh,20px); display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
   button.action {
-    font-family: "Nunito", sans-serif; font-weight: 800;
-    font-size: clamp(15px, 2.6vw, 18px);
-    border: none; border-radius: 999px; padding: 14px 24px; cursor: pointer;
-    transition: transform .12s ease, opacity .2s ease;
+    font-family:"Nunito",sans-serif; font-weight:800; font-size:clamp(14px,2.3vw,16px);
+    border:none; border-radius:999px; padding:12px 20px; cursor:pointer;
+    transition:transform .12s ease, opacity .2s ease;
   }
-  button.action:active { transform: scale(.96); }
-  button.action:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-  button.action[disabled] { opacity: .45; cursor: default; }
-  .syllables-btn { background: var(--amber); color: #fff; }
-  .whole-btn { background: var(--teal-soft); color: var(--teal-ink); }
+  button.action:active { transform:scale(.96); }
+  button.action:focus-visible { outline:3px solid var(--ink); outline-offset:3px; }
+  button.action[disabled] { opacity:.45; cursor:default; }
+  .syllables-btn { background:var(--amber); color:#fff; }
+  .whole-btn { background:var(--teal-soft); color:var(--teal-ink); }
+  .build-hint { margin-top:clamp(12px,2vh,18px); font-weight:700; color:var(--teal); font-size:clamp(13px,2.1vw,15px); }
 
-  .build-hint {
-    margin-top: clamp(16px, 2.8vh, 26px);
-    font-weight: 700; color: var(--teal);
-    font-size: clamp(14px, 2.3vw, 17px);
-  }
-  .finished {
-    margin-top: clamp(16px, 2.8vh, 26px);
-    font-weight: 800; color: var(--amber-ink);
-    font-size: clamp(15px, 2.5vw, 18px);
-    display: none;
-  }
-
-  /* Bottom navigation */
-  .nav {
-    width: 100%; max-width: 720px;
-    margin-top: clamp(18px, 3vh, 28px);
-    display: flex; align-items: center; gap: 12px;
-  }
+  .nav { width:100%; max-width:720px; margin-top:clamp(14px,2.4vh,22px); display:flex; align-items:center; gap:12px; }
   button.nav-btn {
-    font-family: "Nunito", sans-serif; font-weight: 800;
-    border: none; border-radius: 18px; cursor: pointer;
-    transition: transform .12s ease, opacity .2s ease;
-    box-shadow: var(--shadow);
+    font-family:"Nunito",sans-serif; font-weight:800; border:none; border-radius:18px;
+    cursor:pointer; transition:transform .12s ease, opacity .2s ease; box-shadow:var(--shadow);
   }
-  button.nav-btn:active { transform: scale(.97); }
-  button.nav-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-  button.nav-btn[disabled] { opacity: .4; cursor: default; box-shadow: none; }
-
-  .back-btn  { background: #fff; color: var(--ink);
-               font-size: clamp(15px, 2.4vw, 18px); padding: 16px 20px; }
-  .next-btn  { background: var(--ink); color: #fff; flex: 1;
-               font-size: clamp(18px, 3vw, 22px); padding: 18px 20px; }
-  .reset-btn { background: #fff; color: var(--muted);
-               font-size: clamp(13px, 2vw, 15px); padding: 16px 18px; }
-
+  button.nav-btn:active { transform:scale(.97); }
+  button.nav-btn:focus-visible { outline:3px solid var(--ink); outline-offset:3px; }
+  button.nav-btn[disabled] { opacity:.4; cursor:default; box-shadow:none; }
+  .back-btn { background:#fff; color:var(--ink); font-size:clamp(15px,2.4vw,18px); padding:16px 20px; }
+  .next-btn { background:var(--ink); color:#fff; flex:1; font-size:clamp(18px,3vw,22px); padding:18px 20px; }
+  .reset-btn { background:#fff; color:var(--muted); font-size:clamp(13px,2vw,15px); padding:16px 18px; }
   .nospeech {
-    display: none; background: #FFF3F0; color: #B23A1B;
-    border-radius: 14px; padding: 12px 16px; font-weight: 700;
-    font-size: 14px; margin-bottom: 16px; text-align: center;
-    max-width: 720px; width: 100%;
+    display:none; background:#FFF3F0; color:#B23A1B; border-radius:14px; padding:12px 16px;
+    font-weight:700; font-size:14px; margin-bottom:16px; text-align:center; max-width:720px; width:100%;
   }
-
   @media (prefers-reduced-motion: reduce) {
-    .syl, button.action, button.nav-btn { transition: none; }
-    .syl.active { transform: none; }
+    .syl, button.action, button.nav-btn { transition:none; }
+    .syl.active { transform:none; }
   }
 </style>
 </head>
 <body>
 
   <div class="nospeech" id="nospeech">
-    This iPad can't play the word sounds right now. He can still read the word and build it.
+    This iPad can't play the word sounds right now. He can still read each word and build it.
   </div>
 
   <header>
@@ -169,19 +122,7 @@
     <div class="progress" id="progress">&nbsp;</div>
   </header>
 
-  <main>
-    <section class="card">
-      <button class="word" id="word" aria-label="Hear the syllables"></button>
-
-      <div class="sound-row">
-        <button class="action syllables-btn" id="sylBtn">🔊 Hear syllables</button>
-        <button class="action whole-btn" id="wholeBtn">🗣️ Say the whole word</button>
-      </div>
-
-      <div class="build-hint" id="buildHint">Now build it with your letters 🧲</div>
-      <div class="finished" id="finished">🎉 That's the last word! Tap Start over to go again.</div>
-    </section>
-  </main>
+  <main id="cards"><!-- two word cards injected here --></main>
 
   <nav class="nav">
     <button class="nav-btn back-btn"  id="backBtn">◀ Back</button>
@@ -191,74 +132,110 @@
 
 <script>
 /* =========================================================================
-   PARENT SECTION — THIS IS THE ONLY PART YOU EDIT
-   -------------------------------------------------------------------------
-   Put the words in the ORDER you want him to go through them. He sees one
-   word at a time and taps "Next" to move forward. Each iPad remembers its
-   own place, so a brand-new iPad always starts at the first word below.
+   PARENT SECTION + RULES — THIS IS THE ONLY PART YOU EDIT
+   =========================================================================
 
-   FIXING PRONUNCIATION:
-   The iPad sometimes reads a short syllable as letters (e.g. "ap" -> "ay-pee").
-   To fix that, give a syllable a "say" spelling — what he SEES stays the same,
-   but what the iPad SPEAKS uses your spelling. Respell it however sounds right
-   and tweak until it's correct.
+   RULES FOR GENERATING WORDS (keep these — follow them when adding letters):
 
-     { show: "ap",  say: "app" }     // seen as "ap", spoken like "app"
-     { show: "ple", say: "pal" }     // seen as "ple", spoken like "pal"
+   RULE 1 — Cover the alphabet A..Z in order, one group per letter.
+   RULE 2 — Each letter gets EXACTLY 3 words, in this order:
+              (1) a 1-syllable word
+              (2) a 2-syllable word
+              (3) a 3-syllable word
+            This lets him experience 1, 2, and 3 syllables for every letter.
+            (Some letters are hard for 3 syllables, e.g. X/Z — use a name or
+             the closest reasonable word; the page will just warn in console.)
+   RULE 3 — The child sees 2 words PER DAY. The page automatically moves to the
+            next 2 words on each new calendar day. Back / Next override manually,
+            and "Start over" returns to the very first words (letter A).
+            Each iPad keeps its own day count, so a new iPad starts at A.
+   RULE 4 — Revise each letter in BOTH cases. The badge shows it as "Aa"
+            (capital + small) because he builds with capital and small magnets.
+            He can build each word with either set.
+   RULE 5 — SYLLABLES: split each word yourself in the "syllables" list.
+            If the iPad reads a fragment as letters (e.g. "ap" -> "ay-pee"),
+            give that piece a spoken spelling:  { show:"ap", say:"app" }
+            A piece that already sounds right can be plain text: "sun", "ball".
+            You may also add  say:"..."  to a whole word if the blend sounds off.
 
-   If a syllable already sounds fine, just write it as plain text and skip
-   "say":  "sun", "flow", "rab"  etc.
-
-   You can also add "say" to the whole word if the blended word sounds wrong.
-
-   Splitting examples:
-     apple    -> [{show:"ap", say:"app"}, {show:"ple", say:"pal"}]
-     sunflower-> ["sun", "flow", "er"]
-     banana   -> ["ba", "na", "na"]
+   FORMAT:
+     { letter:"A", words:[
+         { text:"<1-syllable word>", syllables:[ ... ] },
+         { text:"<2-syllable word>", syllables:[ ..., ... ] },
+         { text:"<3-syllable word>", syllables:[ ..., ..., ... ] }
+     ]}
    ========================================================================= */
 
-   const WORDS = [
-     { text: "apple",  syllables: [ {show:"ap", say:"app"}, {show:"ple", say:"pal"} ] },
-     { text: "ball",   syllables: ["ball"] },
-     { text: "cat",    syllables: ["cat"] },
-     { text: "doctor", syllables: [ {show:"doc", say:"dock"}, {show:"tor", say:"ter"} ] },
-     { text: "elephant", syllables: [ {show:"el", say:"ell"}, "e", {show:"phant", say:"fant"} ] },
-     { text: "flower", syllables: [ "flow", {show:"er", say:"ur"} ] }
+   const LETTERS = [
+     { letter:"A", words:[
+       { text:"ant",      syllables:["ant"] },
+       { text:"apple",    syllables:[ {show:"ap", say:"app"}, {show:"ple", say:"pal"} ] },
+       { text:"alphabet", syllables:[ {show:"al", say:"al"}, {show:"pha", say:"fuh"}, {show:"bet", say:"bet"} ] }
+     ]},
+     { letter:"B", words:[
+       { text:"ball",     syllables:["ball"] },
+       { text:"basket",   syllables:[ {show:"bas", say:"bass"}, {show:"ket", say:"kit"} ] },
+       { text:"butterfly",syllables:[ {show:"but", say:"but"}, {show:"ter", say:"ter"}, {show:"fly", say:"fly"} ] }
+     ]},
+     { letter:"C", words:[
+       { text:"cat",      syllables:["cat"] },
+       { text:"candy",    syllables:[ {show:"can", say:"can"}, {show:"dy", say:"dee"} ] },
+       { text:"crocodile",syllables:[ {show:"croc", say:"crock"}, {show:"o", say:"uh"}, {show:"dile", say:"dyle"} ] }
+     ]}
+     // Add D, E, F ... the same way: 3 words each (1, 2, then 3 syllables).
    ];
 
 /* =========================================================================
    END OF PARENT SECTION — nothing below needs changing.
    ========================================================================= */
 
-  const STORE_KEY = "mywords.index.v1";
+  // Flatten letter groups into one ordered list of words (3 per letter).
+  const WORDS = [];
+  LETTERS.forEach(group => {
+    group.words.forEach(w => WORDS.push({ letter: group.letter, word: w }));
+  });
 
-  // Save/read position per device. Wrapped so it degrades gracefully if a
-  // browser blocks storage (falls back to memory for that session).
-  let memoryIndex = 0;
-  function loadIndex() {
-    try {
-      const v = window.localStorage.getItem(STORE_KEY);
-      if (v === null) return 0;
-      const n = parseInt(v, 10);
-      return isNaN(n) ? 0 : n;
-    } catch (e) { return memoryIndex; }
+  // Console checks so the rules stay easy to follow while editing.
+  LETTERS.forEach(g => {
+    if (g.words.length !== 3)
+      console.warn('Rule 2: letter "' + g.letter + '" should have 3 words (1,2,3 syllables); it has ' + g.words.length + '.');
+    g.words.forEach((w, i) => {
+      if (w.syllables.length !== i + 1)
+        console.warn('Rule 2: "' + w.text + '" (' + g.letter + ') is expected to have ' + (i + 1) + ' syllable(s) but has ' + w.syllables.length + '.');
+    });
+  });
+
+  // Two words per day = one "set". Set p shows WORDS[2p] and WORDS[2p+1].
+  const PER_DAY = 2;
+  const NUM_SETS = Math.max(1, Math.ceil(WORDS.length / PER_DAY));
+
+  // ---- Per-device progress with one automatic step per calendar day -------
+  const STORE_KEY = "mywords.v3";
+  function todayStr() {
+    const d = new Date();
+    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
-  function saveIndex(i) {
-    memoryIndex = i;
-    try { window.localStorage.setItem(STORE_KEY, String(i)); } catch (e) {}
+  let mem = { set: 0, lastDate: null };
+  function loadState() {
+    try { const v = JSON.parse(window.localStorage.getItem(STORE_KEY)); return v || null; }
+    catch (e) { return mem; }
   }
-
-  let index = Math.min(Math.max(loadIndex(), 0), Math.max(WORDS.length - 1, 0));
-
-  // A syllable can be a plain string ("sun") or an object ({show, say}).
-  // "show" is what the child sees; "say" is what the iPad pronounces.
-  function sylShow(s) { return (typeof s === "string") ? s : s.show; }
-  function sylSay(s)  { return (typeof s === "string") ? s : (s.say || s.show); }
+  function saveState(s) {
+    mem = s;
+    try { window.localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  let state = loadState() || { set: 0, lastDate: null };
+  // Automatic: advance ONE set the first time it's opened on a new calendar day.
+  if (state.lastDate && state.lastDate !== todayStr()) {
+    state.set = Math.min(state.set + 1, NUM_SETS - 1);
+  }
+  state.lastDate = todayStr();
+  state.set = Math.min(Math.max(state.set, 0), NUM_SETS - 1);
+  saveState(state);
 
   // ---- Speech -------------------------------------------------------------
   const synth = window.speechSynthesis;
   let chosenVoice = null, busy = false;
-
   function pickVoice() {
     if (!synth) return;
     const voices = synth.getVoices() || [];
@@ -289,93 +266,130 @@
     })();
   }
 
-  // ---- DOM ----------------------------------------------------------------
-  const wordEl     = document.getElementById("word");
-  const progressEl = document.getElementById("progress");
-  const sylBtn     = document.getElementById("sylBtn");
-  const wholeBtn   = document.getElementById("wholeBtn");
-  const buildHint  = document.getElementById("buildHint");
-  const finishedEl = document.getElementById("finished");
-  const backBtn    = document.getElementById("backBtn");
-  const nextBtn    = document.getElementById("nextBtn");
-  const resetBtn   = document.getElementById("resetBtn");
+  function sylShow(s) { return (typeof s === "string") ? s : s.show; }
+  function sylSay(s)  { return (typeof s === "string") ? s : (s.say || s.show); }
 
-  let tiles = [];
+  // ---- Build one word card ------------------------------------------------
+  const allTiles = [];
+  function setBusyAll(s) {
+    busy = s;
+    document.querySelectorAll(".action").forEach(b => b.disabled = s);
+  }
+  function clearAllTiles() { allTiles.forEach(t => t.classList.remove("active", "done")); }
+
+  function makeCard(entry) {
+    const w = entry.word;
+    const card = document.createElement("section");
+    card.className = "card";
+
+    const top = document.createElement("div");
+    top.className = "card-top";
+    const badge = document.createElement("div");
+    badge.className = "letter-badge";
+    badge.textContent = entry.letter.toUpperCase() + entry.letter.toLowerCase(); // "Aa"
+    const tag = document.createElement("div");
+    tag.className = "syl-tag";
+    const n = w.syllables.length;
+    tag.textContent = n + (n === 1 ? " syllable" : " syllables");
+    top.appendChild(badge); top.appendChild(tag);
+    card.appendChild(top);
+
+    const wordBtn = document.createElement("button");
+    wordBtn.className = "word";
+    wordBtn.setAttribute("aria-label", "Hear the syllables of " + w.text);
+    const tiles = w.syllables.map(syl => {
+      const span = document.createElement("span");
+      span.className = "syl"; span.textContent = sylShow(syl);
+      wordBtn.appendChild(span); allTiles.push(span); return span;
+    });
+    card.appendChild(wordBtn);
+
+    const row = document.createElement("div");
+    row.className = "sound-row";
+    const sylBtn = document.createElement("button");
+    sylBtn.className = "action syllables-btn"; sylBtn.textContent = "🔊 Hear syllables";
+    const wholeBtn = document.createElement("button");
+    wholeBtn.className = "action whole-btn"; wholeBtn.textContent = "🗣️ Whole word";
+    row.appendChild(sylBtn); row.appendChild(wholeBtn);
+    card.appendChild(row);
+
+    const hint = document.createElement("div");
+    hint.className = "build-hint";
+    hint.innerHTML = "Build it with capital or small letters 🧲";
+    card.appendChild(hint);
+
+    function playSyllables() {
+      if (busy) return;
+      setBusyAll(true); clearAllTiles();
+      speakSequence(
+        w.syllables.map(sylSay), 0.75,
+        (idx) => tiles.forEach((t, k) => {
+          t.classList.toggle("active", k === idx);
+          if (idx !== -1 && k < idx) t.classList.add("done");
+        }),
+        () => { tiles.forEach(t => t.classList.add("done")); setBusyAll(false); }
+      );
+    }
+    function playWhole() {
+      if (busy) return;
+      setBusyAll(true); clearAllTiles();
+      tiles.forEach(t => t.classList.add("active"));
+      speakSequence(
+        [w.say || w.text], 0.85,
+        () => {},
+        () => { tiles.forEach(t => t.classList.remove("active")); setBusyAll(false); }
+      );
+    }
+    wordBtn.addEventListener("click", playSyllables);
+    sylBtn.addEventListener("click", playSyllables);
+    wholeBtn.addEventListener("click", playWhole);
+
+    return card;
+  }
+
+  // ---- Render the current set (2 words) -----------------------------------
+  const cardsEl = document.getElementById("cards"),
+        progressEl = document.getElementById("progress"),
+        backBtn = document.getElementById("backBtn"),
+        nextBtn = document.getElementById("nextBtn"),
+        resetBtn = document.getElementById("resetBtn");
 
   function render() {
-    const word = WORDS[index];
-    progressEl.textContent = (index + 1) + " / " + WORDS.length;
+    if (synth) synth.cancel();
+    busy = false;
+    allTiles.length = 0;
+    cardsEl.innerHTML = "";
 
-    wordEl.innerHTML = "";
-    tiles = word.syllables.map(syl => {
-      const span = document.createElement("span");
-      span.className = "syl";
-      span.textContent = sylShow(syl);
-      wordEl.appendChild(span);
-      return span;
-    });
-    wordEl.setAttribute("aria-label", "Hear the syllables of " + word.text);
+    const start = state.set * PER_DAY;
+    const todays = WORDS.slice(start, start + PER_DAY);
+    todays.forEach(entry => cardsEl.appendChild(makeCard(entry)));
 
-    backBtn.disabled = (index === 0);
-    const isLast = (index === WORDS.length - 1);
+    const letters = [...new Set(todays.map(t => t.letter))].join(" & ");
+    progressEl.textContent = "Day " + (state.set + 1) + " / " + NUM_SETS + "  ·  " + letters;
+
+    backBtn.disabled = (state.set === 0);
+    const isLast = (state.set === NUM_SETS - 1);
     nextBtn.disabled = isLast;
     nextBtn.textContent = isLast ? "Done" : "Next ▶";
-    finishedEl.style.display = isLast ? "block" : "none";
-  }
-
-  function clearTiles() { tiles.forEach(t => t.classList.remove("active", "done")); }
-  function setBusy(state) { busy = state; sylBtn.disabled = state; wholeBtn.disabled = state; }
-
-  function playSyllables() {
-    if (busy) return;
-    setBusy(true); clearTiles();
-    speakSequence(
-      WORDS[index].syllables.map(sylSay), 0.75,
-      (idx) => tiles.forEach((t, k) => {
-        t.classList.toggle("active", k === idx);
-        if (idx !== -1 && k < idx) t.classList.add("done");
-      }),
-      () => { tiles.forEach(t => t.classList.add("done")); setBusy(false); }
-    );
-  }
-
-  function playWhole() {
-    if (busy) return;
-    setBusy(true);
-    tiles.forEach(t => { t.classList.remove("done"); t.classList.add("active"); });
-    speakSequence(
-      [WORDS[index].say || WORDS[index].text], 0.85,
-      () => {},
-      () => { tiles.forEach(t => t.classList.remove("active")); setBusy(false); }
-    );
   }
 
   function go(delta) {
-    const ni = Math.min(Math.max(index + delta, 0), WORDS.length - 1);
-    if (ni === index) return;
-    index = ni; saveIndex(index);
-    if (synth) synth.cancel();
-    busy = false;
+    const ns = Math.min(Math.max(state.set + delta, 0), NUM_SETS - 1);
+    if (ns === state.set) return;
+    state.set = ns; state.lastDate = todayStr(); saveState(state);
     render();
   }
-
   function startOver() {
-    index = 0; saveIndex(0);
-    if (synth) synth.cancel();
-    busy = false;
+    state.set = 0; state.lastDate = todayStr(); saveState(state);
     render();
   }
 
-  wordEl.addEventListener("click", playSyllables);
-  sylBtn.addEventListener("click", playSyllables);
-  wholeBtn.addEventListener("click", playWhole);
   backBtn.addEventListener("click", () => go(-1));
   nextBtn.addEventListener("click", () => go(1));
   resetBtn.addEventListener("click", startOver);
 
   if (WORDS.length === 0) {
-    document.querySelector("main").innerHTML =
-      '<section class="card"><p style="font-weight:700;color:#79899B;">Add words to the WORDS list at the top of this file.</p></section>';
+    cardsEl.innerHTML = '<section class="card"><p style="font-weight:700;color:#79899B;">Add letters and words in the LETTERS list at the top of this file.</p></section>';
     document.querySelector(".nav").style.display = "none";
   } else {
     render();
