@@ -197,23 +197,33 @@
    word at a time and taps "Next" to move forward. Each iPad remembers its
    own place, so a brand-new iPad always starts at the first word below.
 
-   For each word, split it into syllables yourself — the page reads and
-   highlights them in that order.
+   FIXING PRONUNCIATION:
+   The iPad sometimes reads a short syllable as letters (e.g. "ap" -> "ay-pee").
+   To fix that, give a syllable a "say" spelling — what he SEES stays the same,
+   but what the iPad SPEAKS uses your spelling. Respell it however sounds right
+   and tweak until it's correct.
+
+     { show: "ap",  say: "app" }     // seen as "ap", spoken like "app"
+     { show: "ple", say: "pal" }     // seen as "ple", spoken like "pal"
+
+   If a syllable already sounds fine, just write it as plain text and skip
+   "say":  "sun", "flow", "rab"  etc.
+
+   You can also add "say" to the whole word if the blended word sounds wrong.
 
    Splitting examples:
-     apple    -> ["ap", "ple"]
-     rabbit   -> ["rab", "bit"]
+     apple    -> [{show:"ap", say:"app"}, {show:"ple", say:"pal"}]
      sunflower-> ["sun", "flow", "er"]
      banana   -> ["ba", "na", "na"]
    ========================================================================= */
 
    const WORDS = [
-     { text: "apple",     syllables: ["ap", "ple"] },
-     { text: "ball",      syllables: ["ball"] },
-     { text: "cat",       syllables: ["cat"] },
-     { text: "doctor",    syllables: ["doc", "tor"] },
-     { text: "elephant",  syllables: ["el", "e", "phant"] },
-     { text: "flower",    syllables: ["flow", "er"] }
+     { text: "apple",  syllables: [ {show:"ap", say:"app"}, {show:"ple", say:"pal"} ] },
+     { text: "ball",   syllables: ["ball"] },
+     { text: "cat",    syllables: ["cat"] },
+     { text: "doctor", syllables: [ {show:"doc", say:"dock"}, {show:"tor", say:"ter"} ] },
+     { text: "elephant", syllables: [ {show:"el", say:"ell"}, "e", {show:"phant", say:"fant"} ] },
+     { text: "flower", syllables: [ "flow", {show:"er", say:"ur"} ] }
    ];
 
 /* =========================================================================
@@ -239,6 +249,11 @@
   }
 
   let index = Math.min(Math.max(loadIndex(), 0), Math.max(WORDS.length - 1, 0));
+
+  // A syllable can be a plain string ("sun") or an object ({show, say}).
+  // "show" is what the child sees; "say" is what the iPad pronounces.
+  function sylShow(s) { return (typeof s === "string") ? s : s.show; }
+  function sylSay(s)  { return (typeof s === "string") ? s : (s.say || s.show); }
 
   // ---- Speech -------------------------------------------------------------
   const synth = window.speechSynthesis;
@@ -295,7 +310,7 @@
     tiles = word.syllables.map(syl => {
       const span = document.createElement("span");
       span.className = "syl";
-      span.textContent = syl;
+      span.textContent = sylShow(syl);
       wordEl.appendChild(span);
       return span;
     });
@@ -315,7 +330,7 @@
     if (busy) return;
     setBusy(true); clearTiles();
     speakSequence(
-      WORDS[index].syllables, 0.75,
+      WORDS[index].syllables.map(sylSay), 0.75,
       (idx) => tiles.forEach((t, k) => {
         t.classList.toggle("active", k === idx);
         if (idx !== -1 && k < idx) t.classList.add("done");
@@ -329,7 +344,7 @@
     setBusy(true);
     tiles.forEach(t => { t.classList.remove("done"); t.classList.add("active"); });
     speakSequence(
-      [WORDS[index].text], 0.85,
+      [WORDS[index].say || WORDS[index].text], 0.85,
       () => {},
       () => { tiles.forEach(t => t.classList.remove("active")); setBusy(false); }
     );
