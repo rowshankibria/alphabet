@@ -145,10 +145,14 @@
             This lets him experience 1, 2, and 3 syllables for every letter.
             (Some letters are hard for 3 syllables, e.g. X/Z — use a name or
              the closest reasonable word; the page will just warn in console.)
-   RULE 3 — The child sees 2 words PER DAY. The page automatically moves to the
-            next 2 words on each new calendar day. Back / Next override manually,
-            and "Start over" returns to the very first words (letter A).
-            Each iPad keeps its own day count, so a new iPad starts at A.
+   RULE 3 — Each letter is spread over TWO days:
+              Day 1 shows the 1-syllable + 2-syllable words.
+              Day 2 shows those same two AGAIN, plus the 3-syllable word
+                    (so day 2 reviews the easy two and adds the hardest).
+            The page automatically moves to the next day on each new calendar
+            day. Back / Next override manually, and "Start over" returns to the
+            very first day (letter A, day 1). Each iPad keeps its own day count,
+            so a new iPad starts at A.
    RULE 4 — Revise each letter in BOTH cases. The badge shows it as "Aa"
             (capital + small) because he builds with capital and small magnets.
             He can build each word with either set.
@@ -189,10 +193,17 @@
    END OF PARENT SECTION — nothing below needs changing.
    ========================================================================= */
 
-  // Flatten letter groups into one ordered list of words (3 per letter).
-  const WORDS = [];
+  // Build the day-by-day schedule. Each letter spans TWO days:
+  //   Day 1 -> the 1-syllable + 2-syllable words
+  //   Day 2 -> the 1-syllable + 2-syllable words again, PLUS the 3-syllable word
+  // So day 2 reviews the easy two and adds the hardest (5 word-appearances total).
+  const DAYS = [];
   LETTERS.forEach(group => {
-    group.words.forEach(w => WORDS.push({ letter: group.letter, word: w }));
+    const w = group.words;
+    const day1 = [w[0], w[1]].filter(Boolean).map(x => ({ letter: group.letter, word: x }));
+    const day2 = [w[0], w[1], w[2]].filter(Boolean).map(x => ({ letter: group.letter, word: x }));
+    DAYS.push({ letter: group.letter, part: 1, items: day1 });
+    DAYS.push({ letter: group.letter, part: 2, items: day2 });
   });
 
   // Console checks so the rules stay easy to follow while editing.
@@ -205,9 +216,7 @@
     });
   });
 
-  // Two words per day = one "set". Set p shows WORDS[2p] and WORDS[2p+1].
-  const PER_DAY = 2;
-  const NUM_SETS = Math.max(1, Math.ceil(WORDS.length / PER_DAY));
+  const NUM_SETS = Math.max(1, DAYS.length);
 
   // ---- Per-device progress with one automatic step per calendar day -------
   const STORE_KEY = "mywords.v3";
@@ -360,12 +369,10 @@
     allTiles.length = 0;
     cardsEl.innerHTML = "";
 
-    const start = state.set * PER_DAY;
-    const todays = WORDS.slice(start, start + PER_DAY);
-    todays.forEach(entry => cardsEl.appendChild(makeCard(entry)));
+    const day = DAYS[state.set];
+    day.items.forEach(entry => cardsEl.appendChild(makeCard(entry)));
 
-    const letters = [...new Set(todays.map(t => t.letter))].join(" & ");
-    progressEl.textContent = "Day " + (state.set + 1) + " / " + NUM_SETS + "  ·  " + letters;
+    progressEl.textContent = "Letter " + day.letter + " · Day " + day.part + " of 2";
 
     backBtn.disabled = (state.set === 0);
     const isLast = (state.set === NUM_SETS - 1);
@@ -388,7 +395,7 @@
   nextBtn.addEventListener("click", () => go(1));
   resetBtn.addEventListener("click", startOver);
 
-  if (WORDS.length === 0) {
+  if (DAYS.length === 0) {
     cardsEl.innerHTML = '<section class="card"><p style="font-weight:700;color:#79899B;">Add letters and words in the LETTERS list at the top of this file.</p></section>';
     document.querySelector(".nav").style.display = "none";
   } else {
