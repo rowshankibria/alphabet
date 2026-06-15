@@ -80,7 +80,7 @@
    HOW THIS WORKS (no buttons — it changes by itself each day)
    -------------------------------------------------------------------------
    - Two words show automatically each day, moving A -> Z. Each letter takes
-     two days: Day 1 (a 1- and 2-syllable word) and Day 2 (a 1-, 2- and
+     two days: Day 1 (a 1- and 2-syllable word) and Day 2 (a 2- and
      3-syllable word).
    - Which day it is is COUNTED from "startDate" in the file schedule.json.
      Today's words are chosen automatically; tomorrow it advances on its own.
@@ -128,7 +128,7 @@
   function composeDay(dayIndex) {
     const letter = ALPHABET[Math.floor(dayIndex / 2)];
     const part = (dayIndex % 2) + 1;                       // 1 or 2
-    const counts = (part === 1) ? [1, 2] : [1, 2, 3];
+    const counts = (part === 1) ? [1, 2] : [2, 3];
     const rng = mulberry32(dayIndex + 1);                  // same day => same words
     const exclude = new Set();
     if (part === 2) {                                      // Day 2 = new words, not Day 1's

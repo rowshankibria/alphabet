@@ -89,7 +89,7 @@
   function composeDay(dayIndex) {
     const letter = ALPHABET[Math.floor(dayIndex / 2)];
     const part = (dayIndex % 2) + 1;
-    const counts = (part === 1) ? [1, 2] : [1, 2, 3];
+    const counts = (part === 1) ? [1, 2] : [2, 3];
     const rng = mulberry32(dayIndex + 1);
     const exclude = new Set();
     if (part === 2) { composeDay(dayIndex - 1).items.forEach(it => exclude.add(it.word.text)); }
