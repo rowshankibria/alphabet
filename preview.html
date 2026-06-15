@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Tomorrow's Words (Parent)</title>
+<meta name="theme-color" content="#2B3242" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:#222838; --bg-top:#2B3242; --card:#FFFFFF;
+    --ink:#2B3242; --muted:#7E8AA0; --accent:#F59E0B;
+    --tile-rest:#F4F7FA; --tile-edge:#E2EAF1; --teal:#12B3A2;
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+  }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { margin:0; padding:0; }
+  body {
+    font-family:"Nunito",system-ui,sans-serif; color:#fff;
+    background:linear-gradient(180deg,var(--bg-top),var(--bg));
+    min-height:100vh; min-height:100dvh; padding:clamp(16px,4vw,40px);
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .wrap { width:100%; max-width:680px; }
+  header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+  .brand { font-family:"Fredoka",sans-serif; font-weight:600; font-size:clamp(20px,3.4vw,26px); }
+  .brand .dot { color:var(--accent); }
+  .lock { font-size:13px; font-weight:800; color:#fff; background:rgba(255,255,255,.12); border-radius:999px; padding:8px 14px; }
+  .sub { color:#C2CADA; font-weight:700; font-size:clamp(14px,2.5vw,16px); margin:0 0 6px; }
+  .dayline { color:var(--accent); font-weight:800; font-size:clamp(15px,2.7vw,18px); margin:0 0 clamp(16px,3vh,24px); }
+
+  .card { background:var(--card); color:var(--ink); border-radius:24px; box-shadow:var(--shadow); padding:clamp(18px,3.4vw,28px); text-align:center; margin-bottom:clamp(12px,2.2vh,18px); }
+  .card-top { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:14px; }
+  .badge { font-family:"Fredoka",sans-serif; font-weight:700; height:48px; min-width:70px; padding:0 12px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:28px; color:#fff; background:var(--teal); }
+  .tag { font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); background:var(--tile-rest); border-radius:999px; padding:6px 12px; }
+  .word { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+  .syl { font-family:"Fredoka",sans-serif; font-weight:600; font-size:clamp(34px,8vw,56px); line-height:1; color:var(--ink); background:var(--tile-rest); border:2px solid var(--tile-edge); border-radius:14px; padding:10px 18px; }
+  .full { margin-top:10px; font-weight:800; font-size:clamp(16px,3vw,20px); color:var(--muted); }
+
+  .hint { margin-top:clamp(14px,2.6vh,22px); background:rgba(255,255,255,.10); border-radius:16px; padding:14px 18px; color:#E7ECF5; font-weight:700; font-size:14px; line-height:1.5; }
+  .backlink { display:inline-block; margin-top:18px; color:#C2CADA; font-weight:800; font-size:14px; text-decoration:none; }
+  .nobank { display:none; background:#5b2018; color:#FFD9CE; border-radius:14px; padding:12px 16px; font-weight:700; font-size:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Tomorrow's Words<span class="dot">.</span></div>
+    <div class="lock">🔒 Parent</div>
+  </header>
+  <p class="sub">Preview so you can hide the magnet letters tonight.</p>
+  <p class="dayline" id="dayline">&nbsp;</p>
+
+  <div class="nobank" id="nobank">Could not load words.js. Put this page in the same folder as index.html, words.js and schedule.json.</div>
+
+  <div id="cards"></div>
+
+  <div class="hint">These are exactly the words your son will see tomorrow. Hide the letters he'll need, then they'll appear in his app on their own in the morning.</div>
+  <a class="backlink" href="index.html">← Back to his app</a>
+</div>
+
+<script src="words.js"></script>
+<script>
+  if (typeof BANK === "undefined") { document.getElementById("nobank").style.display = "block"; }
+  const SAFE_BANK = (typeof BANK !== "undefined") ? BANK : {};
+  const ALPHABET = Object.keys(SAFE_BANK).sort();
+  const TOTAL_DAYS = Math.max(1, ALPHABET.length * 2);
+  function bucket(letter, n) { return (SAFE_BANK[letter] && SAFE_BANK[letter][String(n)]) || []; }
+
+  // ---- identical logic to index.html so the preview always matches --------
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function dayNumber(startISO) {
+    const p = String(startISO).split("-").map(Number);
+    const start = new Date(p[0], (p[1]||1)-1, p[2]||1);
+    const now = new Date();
+    const a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const b = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    return Math.round((a - b) / 86400000);
+  }
+  function composeDay(dayIndex) {
+    const letter = ALPHABET[Math.floor(dayIndex / 2)];
+    const part = (dayIndex % 2) + 1;
+    const counts = (part === 1) ? [1, 2] : [1, 2, 3];
+    const rng = mulberry32(dayIndex + 1);
+    const exclude = new Set();
+    if (part === 2) { composeDay(dayIndex - 1).items.forEach(it => exclude.add(it.word.text)); }
+    const items = [];
+    counts.forEach(n => {
+      const arr = bucket(letter, n);
+      let pool = arr.filter(w => !exclude.has(w.text));
+      if (!pool.length) pool = arr;
+      if (pool.length) { const w = pool[Math.floor(rng() * pool.length)]; items.push({ letter: letter, word: w }); exclude.add(w.text); }
+    });
+    return { letter: letter, part: part, items: items };
+  }
+  function todayISO() { const d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  function sylShow(s){ return (typeof s==="string")?s:s.show; }
+  function cap(str){ return str ? str.charAt(0).toUpperCase()+str.slice(1) : str; }
+
+  function renderCards(day) {
+    const host = document.getElementById("cards");
+    host.innerHTML = "";
+    day.items.forEach(entry => {
+      const w = entry.word;
+      const card = document.createElement("div"); card.className = "card";
+      const top = document.createElement("div"); top.className = "card-top";
+      const badge = document.createElement("div"); badge.className = "badge";
+      badge.textContent = entry.letter.toUpperCase() + entry.letter.toLowerCase();
+      const tag = document.createElement("div"); tag.className = "tag";
+      const n = w.syllables.length; tag.textContent = n + (n===1?" syllable":" syllables");
+      top.appendChild(badge); top.appendChild(tag); card.appendChild(top);
+      const word = document.createElement("div"); word.className = "word";
+      w.syllables.forEach((syl, idx) => {
+        const span = document.createElement("span"); span.className = "syl";
+        span.textContent = (idx===0)?cap(sylShow(syl)):sylShow(syl); word.appendChild(span);
+      });
+      card.appendChild(word);
+      const full = document.createElement("div"); full.className = "full"; full.textContent = cap(w.text);
+      card.appendChild(full);
+      host.appendChild(card);
+    });
+  }
+
+  async function loadStartDate() {
+    try { const r = await fetch("schedule.json", { cache:"no-store" }); if (r.ok) { const j = await r.json(); if (j && j.startDate) return j.startDate; } } catch(e){}
+    return todayISO();
+  }
+
+  (async function init(){
+    if (ALPHABET.length === 0) { document.getElementById("dayline").textContent = "No words found."; return; }
+    const startISO = await loadStartDate();
+    let today = dayNumber(startISO); if (isNaN(today)) today = 0;
+    let tomorrow = Math.min(Math.max(today + 1, 0), TOTAL_DAYS - 1);
+
+    const t = new Date(); t.setDate(t.getDate() + 1);
+    const dateStr = t.toLocaleDateString(undefined, { weekday:"long", month:"short", day:"numeric" });
+
+    const day = composeDay(tomorrow);
+    document.getElementById("dayline").textContent = "Tomorrow — " + dateStr + "  ·  Letter " + day.letter + ", Day " + day.part;
+    renderCards(day);
+  })();
+</script>
+</body>
+</html>

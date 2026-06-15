@@ -1,0 +1,4 @@
+{
+  "_readme": "Two words appear automatically each day, moving from A to Z. Each letter takes 2 days (Day 1, then Day 2). The app counts days from startDate below. TO RESET to the beginning (letter A, Day 1): set startDate to today's date in YYYY-MM-DD format. To jump ahead, set an earlier date.",
+  "startDate": "2026-06-14"
+}

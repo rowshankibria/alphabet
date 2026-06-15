@@ -31,385 +31,122 @@
     min-height:100vh; min-height:100dvh; padding:clamp(16px,4vw,40px);
     display:flex; flex-direction:column; align-items:center;
   }
-  header {
-    width:100%; max-width:720px; display:flex; align-items:center;
-    justify-content:space-between; gap:12px; margin-bottom:clamp(12px,2.2vh,20px);
-  }
+  header { width:100%; max-width:720px; display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:clamp(10px,1.8vh,16px); }
   .brand { font-family:"Fredoka",sans-serif; font-weight:600; font-size:clamp(20px,3.4vw,28px); }
   .brand .dot { color:var(--amber); }
-  .progress {
-    font-weight:800; color:var(--muted); font-size:clamp(13px,2.3vw,16px);
-    background:#fff; border-radius:999px; padding:8px 16px; box-shadow:var(--shadow);
-  }
-  main { width:100%; max-width:720px; flex:1; display:flex; flex-direction:column; gap:clamp(14px,2.4vh,22px); }
+  .page-link { font-weight:800; font-size:clamp(12px,2.2vw,14px); text-decoration:none; color:var(--ink); background:#fff; border-radius:999px; padding:8px 14px; box-shadow:var(--shadow); }
+  .progress { width:100%; max-width:720px; text-align:center; font-weight:800; color:var(--muted); font-size:clamp(13px,2.3vw,16px); margin-bottom:clamp(12px,2.2vh,20px); }
 
-  .card {
-    background:var(--card); border-radius:26px; box-shadow:var(--shadow);
-    padding:clamp(18px,3.4vw,30px); text-align:center;
-    display:flex; flex-direction:column; align-items:center;
-  }
+  main { width:100%; max-width:720px; flex:1; display:flex; flex-direction:column; justify-content:center; gap:clamp(14px,2.4vh,22px); }
+  .card { background:var(--card); border-radius:26px; box-shadow:var(--shadow); padding:clamp(20px,3.8vw,34px); text-align:center; display:flex; flex-direction:column; align-items:center; }
   .card-top { display:flex; align-items:center; gap:12px; margin-bottom:clamp(12px,2vh,18px); }
-  .letter-badge {
-    font-family:"Fredoka",sans-serif; font-weight:700;
-    height:clamp(44px,8vw,58px); min-width:clamp(64px,13vw,86px); padding:0 12px;
-    border-radius:16px; display:flex; align-items:center; justify-content:center;
-    font-size:clamp(24px,5vw,34px); color:#fff; background:var(--teal); letter-spacing:.04em;
-    box-shadow:0 8px 18px rgba(18,179,162,.30);
-  }
-  .syl-tag {
-    font-weight:800; font-size:clamp(11px,2vw,13px); text-transform:uppercase; letter-spacing:.1em;
-    color:var(--muted); background:var(--tile-rest); border-radius:999px; padding:6px 12px;
-  }
-  .word {
-    display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(5px,1.2vw,10px);
-    cursor:pointer; user-select:none; margin:0 auto; padding:4px; border:none; background:none;
-  }
-  .syl {
-    font-family:"Fredoka",sans-serif; font-weight:600;
-    font-size:clamp(36px,9vw,68px); line-height:1; color:var(--ink);
-    background:var(--tile-rest); border:2px solid var(--tile-edge); border-radius:16px;
-    padding:clamp(8px,1.8vw,16px) clamp(12px,2.4vw,22px);
-    transition:transform .18s ease, background .18s ease, color .18s ease,
-               box-shadow .18s ease, border-color .18s ease;
-  }
-  .syl.active {
-    background:var(--amber); border-color:var(--amber); color:#fff;
-    transform:translateY(-5px) scale(1.05); box-shadow:0 12px 24px rgba(245,158,11,.40);
-  }
+  .letter-badge { font-family:"Fredoka",sans-serif; font-weight:700; height:clamp(44px,8vw,58px); min-width:clamp(64px,13vw,86px); padding:0 12px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:clamp(24px,5vw,34px); color:#fff; background:var(--teal); letter-spacing:.04em; box-shadow:0 8px 18px rgba(18,179,162,.30); }
+  .syl-tag { font-weight:800; font-size:clamp(11px,2vw,13px); text-transform:uppercase; letter-spacing:.1em; color:var(--muted); background:var(--tile-rest); border-radius:999px; padding:6px 12px; }
+  .word { display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(5px,1.2vw,10px); cursor:pointer; user-select:none; margin:0 auto; padding:4px; border:none; background:none; }
+  .syl { font-family:"Fredoka",sans-serif; font-weight:600; font-size:clamp(40px,10vw,76px); line-height:1; color:var(--ink); background:var(--tile-rest); border:2px solid var(--tile-edge); border-radius:16px; padding:clamp(8px,2vw,18px) clamp(12px,2.6vw,24px); transition:transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .syl.active { background:var(--amber); border-color:var(--amber); color:#fff; transform:translateY(-5px) scale(1.05); box-shadow:0 12px 24px rgba(245,158,11,.40); }
   .syl.done { background:var(--amber-soft); border-color:var(--amber-soft); color:var(--amber-ink); }
   .sound-row { margin-top:clamp(14px,2.4vh,20px); display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-  button.action {
-    font-family:"Nunito",sans-serif; font-weight:800; font-size:clamp(14px,2.3vw,16px);
-    border:none; border-radius:999px; padding:12px 20px; cursor:pointer;
-    transition:transform .12s ease, opacity .2s ease;
-  }
+  button.action { font-family:"Nunito",sans-serif; font-weight:800; font-size:clamp(14px,2.3vw,16px); border:none; border-radius:999px; padding:12px 20px; cursor:pointer; transition:transform .12s ease, opacity .2s ease; }
   button.action:active { transform:scale(.96); }
   button.action:focus-visible { outline:3px solid var(--ink); outline-offset:3px; }
   button.action[disabled] { opacity:.45; cursor:default; }
   .syllables-btn { background:var(--amber); color:#fff; }
   .whole-btn { background:var(--teal-soft); color:var(--teal-ink); }
   .build-hint { margin-top:clamp(12px,2vh,18px); font-weight:700; color:var(--teal); font-size:clamp(13px,2.1vw,15px); }
-
-  .nav { width:100%; max-width:720px; margin-top:clamp(14px,2.4vh,22px); display:flex; align-items:center; gap:12px; }
-  button.nav-btn {
-    font-family:"Nunito",sans-serif; font-weight:800; border:none; border-radius:18px;
-    cursor:pointer; transition:transform .12s ease, opacity .2s ease; box-shadow:var(--shadow);
-  }
-  button.nav-btn:active { transform:scale(.97); }
-  button.nav-btn:focus-visible { outline:3px solid var(--ink); outline-offset:3px; }
-  button.nav-btn[disabled] { opacity:.4; cursor:default; box-shadow:none; }
-  .back-btn { background:#fff; color:var(--ink); font-size:clamp(15px,2.4vw,18px); padding:16px 20px; }
-  .next-btn { background:var(--ink); color:#fff; flex:1; font-size:clamp(18px,3vw,22px); padding:18px 20px; }
-  .reset-btn { background:#fff; color:var(--muted); font-size:clamp(13px,2vw,15px); padding:16px 18px; }
-  .nospeech {
-    display:none; background:#FFF3F0; color:#B23A1B; border-radius:14px; padding:12px 16px;
-    font-weight:700; font-size:14px; margin-bottom:16px; text-align:center; max-width:720px; width:100%;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .syl, button.action, button.nav-btn { transition:none; }
-    .syl.active { transform:none; }
-  }
+  .nospeech, .nobank { display:none; background:#FFF3F0; color:#B23A1B; border-radius:14px; padding:12px 16px; font-weight:700; font-size:14px; margin-bottom:16px; text-align:center; max-width:720px; width:100%; }
+  @media (prefers-reduced-motion: reduce) { .syl, button.action { transition:none; } .syl.active { transform:none; } }
 </style>
 </head>
 <body>
 
-  <div class="nospeech" id="nospeech">
-    This iPad can't play the word sounds right now. He can still read each word and build it.
-  </div>
+  <div class="nospeech" id="nospeech">This iPad can't play the word sounds right now. He can still read each word and build it.</div>
+  <div class="nobank" id="nobank">Could not load the word list (words.js). Make sure words.js is in the same folder as this page.</div>
 
   <header>
     <div class="brand">My Words<span class="dot">.</span></div>
-    <div style="display:flex; align-items:center; gap:10px;">
-      <a href="sounds.html" style="font-weight:800; font-size:clamp(12px,2.2vw,14px); text-decoration:none; color:var(--ink); background:#fff; border-radius:999px; padding:8px 14px; box-shadow:var(--shadow);">Sounds →</a>
-      <div class="progress" id="progress">&nbsp;</div>
-    </div>
+    <a class="page-link" href="sounds.html">Sounds →</a>
   </header>
 
-  <main id="cards"><!-- the day's word cards are injected here --></main>
+  <div class="progress" id="progress">&nbsp;</div>
 
-  <nav class="nav">
-    <button class="nav-btn back-btn"  id="backBtn">◀ Back</button>
-    <button class="nav-btn next-btn"  id="nextBtn">Next ▶</button>
-    <button class="nav-btn reset-btn" id="resetBtn">↺ Start over</button>
-  </nav>
+  <main id="cards"><!-- today's word cards are injected here --></main>
+
+<!-- The word bank: 500+ words grouped by letter and syllable count. -->
+<script src="words.js"></script>
 
 <script>
 /* =========================================================================
-   PARENT SECTION + RULES — THIS IS THE ONLY PART YOU EDIT
-   =========================================================================
+   HOW THIS WORKS (no buttons — it changes by itself each day)
+   -------------------------------------------------------------------------
+   - Two words show automatically each day, moving A -> Z. Each letter takes
+     two days: Day 1 (a 1- and 2-syllable word) and Day 2 (a 1-, 2- and
+     3-syllable word).
+   - Which day it is is COUNTED from "startDate" in the file schedule.json.
+     Today's words are chosen automatically; tomorrow it advances on its own.
+   - The words for a given day are fixed for that whole day (they don't change
+     when you reload), but each new day brings new random words from the bank.
 
-   RULES FOR GENERATING WORDS (follow these when adding or changing words):
+   TO RESET to the very beginning (letter A, Day 1):
+     open schedule.json and set "startDate" to today's date, e.g. "2026-06-14".
+   TO JUMP AHEAD: set an earlier startDate.
 
-   RULE 1 — Cover the alphabet A..Z in order, one group per letter.
-
-   RULE 2 — Each letter has 5 DIFFERENT words, split across TWO days:
-              day1 = [ a 1-syllable word , a 2-syllable word ]          (2 words)
-              day2 = [ a 1-syllable word , a 2-syllable word ,
-                       a 3-syllable word ]                              (3 words)
-            All five words are different. Day 2 is brand-new words, NOT a
-            repeat of day 1. This lets him meet 1, 2 and 3 syllables per letter.
-            (Hard letters like X are approximate — use the closest kid word.)
-
-   RULE 3 — The page shows one day at a time and AUTO-ADVANCES to the next day
-            on each new calendar day. Back / Next override manually; "Start over"
-            returns to letter A, day 1. Each iPad keeps its own day count, so a
-            brand-new iPad starts at A.
-
-   RULE 4 — The first letter is shown as a CAPITAL automatically (Ant, Apple).
-            The badge shows the letter in BOTH cases ("Aa") because he builds
-            with capital and small magnet sets — he can use either.
-
-   RULE 5 — SYLLABLES: split each word in its "syllables" list (lowercase is
-            fine; the first letter is capitalised for display automatically).
-            If the iPad reads a fragment as letters (e.g. "ap" -> "ay-pee"),
-            give that piece a spoken spelling:  { show:"ap", say:"app" }.
-            A piece that already sounds right can be plain text: "sun", "ball".
-            The "say" spellings below are good starting guesses — listen and
-            tweak any that sound wrong. A better iPad voice helps a lot:
-            Settings > Accessibility > Spoken Content > Voices > English.
-
-   FORMAT:
-     { letter:"A",
-       day1:[ {1-syllable word}, {2-syllable word} ],
-       day2:[ {1-syllable word}, {2-syllable word}, {3-syllable word} ] }
+   Files needed together in the repo: index.html, words.js, schedule.json.
+   (sounds.html is the separate Letter Sounds page.)
    ========================================================================= */
 
-   const LETTERS = [
-     { letter:"A",
-       day1:[ {text:"ant", syllables:["ant"]},
-              {text:"apple", syllables:[{show:"ap",say:"app"},{show:"ple",say:"pul"}]} ],
-       day2:[ {text:"arm", syllables:["arm"]},
-              {text:"anchor", syllables:[{show:"an",say:"ang"},{show:"chor",say:"ker"}]},
-              {text:"alphabet", syllables:[{show:"al",say:"al"},{show:"pha",say:"fuh"},{show:"bet",say:"bet"}]} ] },
+  if (typeof BANK === "undefined") { document.getElementById("nobank").style.display = "block"; }
+  const SAFE_BANK = (typeof BANK !== "undefined") ? BANK : {};
+  const ALPHABET = Object.keys(SAFE_BANK).sort();        // A..Z
+  const TOTAL_DAYS = Math.max(1, ALPHABET.length * 2);
 
-     { letter:"B",
-       day1:[ {text:"ball", syllables:["ball"]},
-              {text:"basket", syllables:[{show:"bas",say:"bass"},{show:"ket",say:"kit"}]} ],
-       day2:[ {text:"bird", syllables:["bird"]},
-              {text:"button", syllables:[{show:"but",say:"but"},{show:"ton",say:"tun"}]},
-              {text:"butterfly", syllables:[{show:"but",say:"but"},{show:"ter",say:"ter"},{show:"fly",say:"fly"}]} ] },
+  function bucket(letter, n) { return (SAFE_BANK[letter] && SAFE_BANK[letter][String(n)]) || []; }
 
-     { letter:"C",
-       day1:[ {text:"cat", syllables:["cat"]},
-              {text:"candy", syllables:[{show:"can",say:"can"},{show:"dy",say:"dee"}]} ],
-       day2:[ {text:"cup", syllables:["cup"]},
-              {text:"carrot", syllables:[{show:"car",say:"care"},{show:"rot",say:"rut"}]},
-              {text:"crocodile", syllables:[{show:"croc",say:"crock"},{show:"o",say:"uh"},{show:"dile",say:"dyle"}]} ] },
-
-     { letter:"D",
-       day1:[ {text:"dog", syllables:["dog"]},
-              {text:"doctor", syllables:[{show:"doc",say:"dock"},{show:"tor",say:"ter"}]} ],
-       day2:[ {text:"duck", syllables:["duck"]},
-              {text:"dolphin", syllables:[{show:"dol",say:"doll"},{show:"phin",say:"fin"}]},
-              {text:"dinosaur", syllables:[{show:"di",say:"dye"},{show:"no",say:"nuh"},{show:"saur",say:"sore"}]} ] },
-
-     { letter:"E",
-       day1:[ {text:"egg", syllables:["egg"]},
-              {text:"eagle", syllables:[{show:"ea",say:"ee"},{show:"gle",say:"gul"}]} ],
-       day2:[ {text:"elf", syllables:["elf"]},
-              {text:"engine", syllables:[{show:"en",say:"en"},{show:"gine",say:"jin"}]},
-              {text:"elephant", syllables:[{show:"el",say:"el"},{show:"e",say:"uh"},{show:"phant",say:"fant"}]} ] },
-
-     { letter:"F",
-       day1:[ {text:"fish", syllables:["fish"]},
-              {text:"flower", syllables:[{show:"flow",say:"flow"},{show:"er",say:"ur"}]} ],
-       day2:[ {text:"frog", syllables:["frog"]},
-              {text:"finger", syllables:[{show:"fin",say:"fin"},{show:"ger",say:"gur"}]},
-              {text:"family", syllables:[{show:"fam",say:"fam"},{show:"i",say:"uh"},{show:"ly",say:"lee"}]} ] },
-
-     { letter:"G",
-       day1:[ {text:"goat", syllables:["goat"]},
-              {text:"garden", syllables:[{show:"gar",say:"gar"},{show:"den",say:"den"}]} ],
-       day2:[ {text:"gift", syllables:["gift"]},
-              {text:"guitar", syllables:[{show:"gui",say:"gih"},{show:"tar",say:"tar"}]},
-              {text:"gorilla", syllables:[{show:"go",say:"guh"},{show:"ril",say:"rill"},{show:"la",say:"luh"}]} ] },
-
-     { letter:"H",
-       day1:[ {text:"hat", syllables:["hat"]},
-              {text:"hammer", syllables:[{show:"ham",say:"ham"},{show:"mer",say:"mer"}]} ],
-       day2:[ {text:"hand", syllables:["hand"]},
-              {text:"honey", syllables:[{show:"hon",say:"hun"},{show:"ey",say:"ee"}]},
-              {text:"hospital", syllables:[{show:"hos",say:"hoss"},{show:"pi",say:"pih"},{show:"tal",say:"tul"}]} ] },
-
-     { letter:"I",
-       day1:[ {text:"ink", syllables:["ink"]},
-              {text:"igloo", syllables:[{show:"ig",say:"ig"},{show:"loo",say:"loo"}]} ],
-       day2:[ {text:"ice", syllables:["ice"]},
-              {text:"insect", syllables:[{show:"in",say:"in"},{show:"sect",say:"sekt"}]},
-              {text:"internet", syllables:[{show:"in",say:"in"},{show:"ter",say:"ter"},{show:"net",say:"net"}]} ] },
-
-     { letter:"J",
-       day1:[ {text:"jam", syllables:["jam"]},
-              {text:"jacket", syllables:[{show:"jack",say:"jak"},{show:"et",say:"it"}]} ],
-       day2:[ {text:"jug", syllables:["jug"]},
-              {text:"jelly", syllables:[{show:"jel",say:"jell"},{show:"ly",say:"lee"}]},
-              {text:"jellyfish", syllables:[{show:"jel",say:"jell"},{show:"ly",say:"lee"},{show:"fish",say:"fish"}]} ] },
-
-     { letter:"K",
-       day1:[ {text:"key", syllables:["key"]},
-              {text:"kitten", syllables:[{show:"kit",say:"kit"},{show:"ten",say:"ten"}]} ],
-       day2:[ {text:"king", syllables:["king"]},
-              {text:"kettle", syllables:[{show:"ket",say:"ket"},{show:"tle",say:"tul"}]},
-              {text:"kangaroo", syllables:[{show:"kan",say:"kang"},{show:"ga",say:"guh"},{show:"roo",say:"roo"}]} ] },
-
-     { letter:"L",
-       day1:[ {text:"leaf", syllables:["leaf"]},
-              {text:"lemon", syllables:[{show:"lem",say:"lem"},{show:"on",say:"un"}]} ],
-       day2:[ {text:"log", syllables:["log"]},
-              {text:"ladder", syllables:[{show:"lad",say:"lad"},{show:"der",say:"der"}]},
-              {text:"ladybug", syllables:[{show:"la",say:"lay"},{show:"dy",say:"dee"},{show:"bug",say:"bug"}]} ] },
-
-     { letter:"M",
-       day1:[ {text:"moon", syllables:["moon"]},
-              {text:"monkey", syllables:[{show:"mon",say:"mun"},{show:"key",say:"kee"}]} ],
-       day2:[ {text:"map", syllables:["map"]},
-              {text:"mango", syllables:[{show:"man",say:"mang"},{show:"go",say:"go"}]},
-              {text:"medicine", syllables:[{show:"med",say:"med"},{show:"i",say:"uh"},{show:"cine",say:"sin"}]} ] },
-
-     { letter:"N",
-       day1:[ {text:"net", syllables:["net"]},
-              {text:"needle", syllables:[{show:"nee",say:"nee"},{show:"dle",say:"dul"}]} ],
-       day2:[ {text:"nut", syllables:["nut"]},
-              {text:"napkin", syllables:[{show:"nap",say:"nap"},{show:"kin",say:"kin"}]},
-              {text:"newspaper", syllables:[{show:"news",say:"newz"},{show:"pa",say:"pay"},{show:"per",say:"per"}]} ] },
-
-     { letter:"O",
-       day1:[ {text:"ox", syllables:["ox"]},
-              {text:"orange", syllables:[{show:"or",say:"or"},{show:"ange",say:"inj"}]} ],
-       day2:[ {text:"owl", syllables:["owl"]},
-              {text:"onion", syllables:[{show:"on",say:"un"},{show:"ion",say:"yun"}]},
-              {text:"octopus", syllables:[{show:"oc",say:"ock"},{show:"to",say:"tuh"},{show:"pus",say:"pus"}]} ] },
-
-     { letter:"P",
-       day1:[ {text:"pig", syllables:["pig"]},
-              {text:"pencil", syllables:[{show:"pen",say:"pen"},{show:"cil",say:"sil"}]} ],
-       day2:[ {text:"pen", syllables:["pen"]},
-              {text:"pizza", syllables:[{show:"piz",say:"peet"},{show:"za",say:"suh"}]},
-              {text:"pineapple", syllables:[{show:"pine",say:"pine"},{show:"ap",say:"app"},{show:"ple",say:"pul"}]} ] },
-
-     { letter:"Q",
-       day1:[ {text:"queen", syllables:["queen"]},
-              {text:"quiet", syllables:[{show:"qui",say:"kwy"},{show:"et",say:"ut"}]} ],
-       day2:[ {text:"quilt", syllables:["quilt"]},
-              {text:"question", syllables:[{show:"ques",say:"kwes"},{show:"tion",say:"chun"}]},
-              {text:"quietly", syllables:[{show:"qui",say:"kwy"},{show:"et",say:"ut"},{show:"ly",say:"lee"}]} ] },
-
-     { letter:"R",
-       day1:[ {text:"rat", syllables:["rat"]},
-              {text:"rabbit", syllables:[{show:"rab",say:"rab"},{show:"bit",say:"bit"}]} ],
-       day2:[ {text:"ring", syllables:["ring"]},
-              {text:"rocket", syllables:[{show:"rock",say:"rock"},{show:"et",say:"it"}]},
-              {text:"radio", syllables:[{show:"ra",say:"ray"},{show:"di",say:"dee"},{show:"o",say:"oh"}]} ] },
-
-     { letter:"S",
-       day1:[ {text:"sun", syllables:["sun"]},
-              {text:"sister", syllables:[{show:"sis",say:"sis"},{show:"ter",say:"ter"}]} ],
-       day2:[ {text:"star", syllables:["star"]},
-              {text:"spider", syllables:[{show:"spi",say:"spy"},{show:"der",say:"der"}]},
-              {text:"strawberry", syllables:[{show:"straw",say:"straw"},{show:"ber",say:"bare"},{show:"ry",say:"ree"}]} ] },
-
-     { letter:"T",
-       day1:[ {text:"top", syllables:["top"]},
-              {text:"tiger", syllables:[{show:"ti",say:"tie"},{show:"ger",say:"ger"}]} ],
-       day2:[ {text:"tree", syllables:["tree"]},
-              {text:"table", syllables:[{show:"ta",say:"tay"},{show:"ble",say:"bul"}]},
-              {text:"telephone", syllables:[{show:"tel",say:"tell"},{show:"e",say:"uh"},{show:"phone",say:"phone"}]} ] },
-
-     { letter:"U",
-       day1:[ {text:"up", syllables:["up"]},
-              {text:"under", syllables:[{show:"un",say:"un"},{show:"der",say:"der"}]} ],
-       day2:[ {text:"urn", syllables:["urn"]},
-              {text:"unit", syllables:[{show:"u",say:"you"},{show:"nit",say:"nit"}]},
-              {text:"umbrella", syllables:[{show:"um",say:"um"},{show:"brel",say:"brell"},{show:"la",say:"luh"}]} ] },
-
-     { letter:"V",
-       day1:[ {text:"van", syllables:["van"]},
-              {text:"velvet", syllables:[{show:"vel",say:"vel"},{show:"vet",say:"vet"}]} ],
-       day2:[ {text:"vase", syllables:["vase"]},
-              {text:"valley", syllables:[{show:"val",say:"val"},{show:"ley",say:"lee"}]},
-              {text:"volcano", syllables:[{show:"vol",say:"vol"},{show:"ca",say:"kay"},{show:"no",say:"no"}]} ] },
-
-     { letter:"W",
-       day1:[ {text:"web", syllables:["web"]},
-              {text:"window", syllables:[{show:"win",say:"win"},{show:"dow",say:"doe"}]} ],
-       day2:[ {text:"wolf", syllables:["wolf"]},
-              {text:"water", syllables:[{show:"wa",say:"waw"},{show:"ter",say:"ter"}]},
-              {text:"wonderful", syllables:[{show:"won",say:"wun"},{show:"der",say:"der"},{show:"ful",say:"full"}]} ] },
-
-     { letter:"X",
-       day1:[ {text:"box", syllables:["box"]},
-              {text:"X-ray", say:"x ray", syllables:[{show:"X",say:"ex"},{show:"ray",say:"ray"}]} ],
-       day2:[ {text:"fox", syllables:["fox"]},
-              {text:"sixty", syllables:[{show:"six",say:"six"},{show:"ty",say:"tee"}]},
-              {text:"xylophone", syllables:[{show:"xy",say:"zy"},{show:"lo",say:"luh"},{show:"phone",say:"phone"}]} ] },
-
-     { letter:"Y",
-       day1:[ {text:"yak", syllables:["yak"]},
-              {text:"yellow", syllables:[{show:"yel",say:"yell"},{show:"low",say:"low"}]} ],
-       day2:[ {text:"yarn", syllables:["yarn"]},
-              {text:"yogurt", syllables:[{show:"yo",say:"yo"},{show:"gurt",say:"gurt"}]},
-              {text:"yesterday", syllables:[{show:"yes",say:"yes"},{show:"ter",say:"ter"},{show:"day",say:"day"}]} ] },
-
-     { letter:"Z",
-       day1:[ {text:"zip", syllables:["zip"]},
-              {text:"zebra", syllables:[{show:"ze",say:"zee"},{show:"bra",say:"bruh"}]} ],
-       day2:[ {text:"zoo", syllables:["zoo"]},
-              {text:"zigzag", syllables:[{show:"zig",say:"zig"},{show:"zag",say:"zag"}]},
-              {text:"zucchini", syllables:[{show:"zuc",say:"zoo"},{show:"chi",say:"kee"},{show:"ni",say:"nee"}]} ] }
-   ];
-
-/* =========================================================================
-   END OF PARENT SECTION — nothing below needs changing.
-   ========================================================================= */
-
-  // Build the day-by-day schedule: 2 days per letter (day1 then day2).
-  const DAYS = [];
-  LETTERS.forEach(group => {
-    const wrap = arr => (arr || []).map(w => ({ letter: group.letter, word: w }));
-    DAYS.push({ letter: group.letter, part: 1, items: wrap(group.day1) });
-    DAYS.push({ letter: group.letter, part: 2, items: wrap(group.day2) });
-  });
-
-  // Console checks so the rules stay easy to follow while editing.
-  LETTERS.forEach(g => {
-    const check = (arr, counts, dayName) => {
-      if (!arr || arr.length !== counts.length) {
-        console.warn('Rule 2: ' + g.letter + ' ' + dayName + ' needs ' + counts.length + ' words.');
-        return;
-      }
-      arr.forEach((w, i) => {
-        if (w.syllables.length !== counts[i])
-          console.warn('Rule 2: ' + g.letter + ' "' + w.text + '" expected ' + counts[i] + ' syllable(s) but has ' + w.syllables.length + '.');
-      });
+  // Small seeded random so a given day always picks the same words.
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
     };
-    check(g.day1, [1, 2], "day1");
-    check(g.day2, [1, 2, 3], "day2");
-  });
+  }
 
-  const NUM_SETS = Math.max(1, DAYS.length);
-
-  // ---- Per-device progress with one automatic step per calendar day -------
-  const STORE_KEY = "mywords.v4";
-  function todayStr() {
+  function todayISO() {
     const d = new Date();
-    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
   }
-  let mem = { set: 0, lastDate: null };
-  function loadState() {
-    try { const v = JSON.parse(window.localStorage.getItem(STORE_KEY)); return v || null; }
-    catch (e) { return mem; }
+  function dayNumber(startISO) {
+    const p = String(startISO).split("-").map(Number);
+    const start = new Date(p[0], (p[1]||1)-1, p[2]||1);
+    const now = new Date();
+    const a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const b = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    return Math.round((a - b) / 86400000);
   }
-  function saveState(s) {
-    mem = s;
-    try { window.localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {}
+
+  function composeDay(dayIndex) {
+    const letter = ALPHABET[Math.floor(dayIndex / 2)];
+    const part = (dayIndex % 2) + 1;                       // 1 or 2
+    const counts = (part === 1) ? [1, 2] : [1, 2, 3];
+    const rng = mulberry32(dayIndex + 1);                  // same day => same words
+    const exclude = new Set();
+    if (part === 2) {                                      // Day 2 = new words, not Day 1's
+      composeDay(dayIndex - 1).items.forEach(it => exclude.add(it.word.text));
+    }
+    const items = [];
+    counts.forEach(n => {
+      const arr = bucket(letter, n);
+      let pool = arr.filter(w => !exclude.has(w.text));
+      if (!pool.length) pool = arr;                        // fallback if pool emptied
+      if (pool.length) {
+        const w = pool[Math.floor(rng() * pool.length)];
+        items.push({ letter: letter, word: w });
+        exclude.add(w.text);
+      }
+    });
+    return { letter: letter, part: part, items: items };
   }
-  let state = loadState() || { set: 0, lastDate: null };
-  if (state.lastDate && state.lastDate !== todayStr()) {
-    state.set = Math.min(state.set + 1, NUM_SETS - 1);   // auto-advance one day
-  }
-  state.lastDate = todayStr();
-  state.set = Math.min(Math.max(state.set, 0), NUM_SETS - 1);
-  saveState(state);
 
   // ---- Speech -------------------------------------------------------------
   const synth = window.speechSynthesis;
@@ -417,10 +154,8 @@
   function pickVoice() {
     if (!synth) return;
     const voices = synth.getVoices() || [];
-    chosenVoice =
-      voices.find(v => /en[-_]US/i.test(v.lang) && /female|samantha|karen|moira/i.test(v.name)) ||
-      voices.find(v => /en[-_]US/i.test(v.lang)) ||
-      voices.find(v => /^en/i.test(v.lang)) || voices[0] || null;
+    chosenVoice = voices.find(v => /en[-_]US/i.test(v.lang) && /female|samantha|karen|moira/i.test(v.name)) ||
+      voices.find(v => /en[-_]US/i.test(v.lang)) || voices.find(v => /^en/i.test(v.lang)) || voices[0] || null;
   }
   if (synth) { pickVoice(); synth.onvoiceschanged = pickVoice; }
   else { document.getElementById("nospeech").style.display = "block"; }
@@ -443,130 +178,89 @@
       synth.speak(u);
     })();
   }
-
   function sylShow(s) { return (typeof s === "string") ? s : s.show; }
   function sylSay(s)  { return (typeof s === "string") ? s : (s.say || s.show); }
   function cap(str)   { return str ? str.charAt(0).toUpperCase() + str.slice(1) : str; }
 
-  // ---- Build one word card ------------------------------------------------
+  // ---- Cards --------------------------------------------------------------
   const allTiles = [];
-  function setBusyAll(s) {
-    busy = s;
-    document.querySelectorAll(".action").forEach(b => b.disabled = s);
-  }
+  function setBusyAll(s) { busy = s; document.querySelectorAll(".action").forEach(b => b.disabled = s); }
   function clearAllTiles() { allTiles.forEach(t => t.classList.remove("active", "done")); }
 
   function makeCard(entry) {
     const w = entry.word;
-    const card = document.createElement("section");
-    card.className = "card";
+    const card = document.createElement("section"); card.className = "card";
+    const top = document.createElement("div"); top.className = "card-top";
+    const badge = document.createElement("div"); badge.className = "letter-badge";
+    badge.textContent = entry.letter.toUpperCase() + entry.letter.toLowerCase();
+    const tag = document.createElement("div"); tag.className = "syl-tag";
+    const n = w.syllables.length; tag.textContent = n + (n === 1 ? " syllable" : " syllables");
+    top.appendChild(badge); top.appendChild(tag); card.appendChild(top);
 
-    const top = document.createElement("div");
-    top.className = "card-top";
-    const badge = document.createElement("div");
-    badge.className = "letter-badge";
-    badge.textContent = entry.letter.toUpperCase() + entry.letter.toLowerCase(); // "Aa"
-    const tag = document.createElement("div");
-    tag.className = "syl-tag";
-    const n = w.syllables.length;
-    tag.textContent = n + (n === 1 ? " syllable" : " syllables");
-    top.appendChild(badge); top.appendChild(tag);
-    card.appendChild(top);
-
-    const wordBtn = document.createElement("button");
-    wordBtn.className = "word";
+    const wordBtn = document.createElement("button"); wordBtn.className = "word";
     wordBtn.setAttribute("aria-label", "Hear the syllables of " + w.text);
     const tiles = w.syllables.map((syl, idx) => {
-      const span = document.createElement("span");
-      span.className = "syl";
-      span.textContent = (idx === 0) ? cap(sylShow(syl)) : sylShow(syl); // capital first letter
+      const span = document.createElement("span"); span.className = "syl";
+      span.textContent = (idx === 0) ? cap(sylShow(syl)) : sylShow(syl);
       wordBtn.appendChild(span); allTiles.push(span); return span;
     });
     card.appendChild(wordBtn);
 
-    const row = document.createElement("div");
-    row.className = "sound-row";
-    const sylBtn = document.createElement("button");
-    sylBtn.className = "action syllables-btn"; sylBtn.textContent = "🔊 Hear syllables";
-    const wholeBtn = document.createElement("button");
-    wholeBtn.className = "action whole-btn"; wholeBtn.textContent = "🗣️ Whole word";
-    row.appendChild(sylBtn); row.appendChild(wholeBtn);
-    card.appendChild(row);
+    const row = document.createElement("div"); row.className = "sound-row";
+    const sylBtn = document.createElement("button"); sylBtn.className = "action syllables-btn"; sylBtn.textContent = "🔊 Hear syllables";
+    const wholeBtn = document.createElement("button"); wholeBtn.className = "action whole-btn"; wholeBtn.textContent = "🗣️ Whole word";
+    row.appendChild(sylBtn); row.appendChild(wholeBtn); card.appendChild(row);
 
-    const hint = document.createElement("div");
-    hint.className = "build-hint";
-    hint.innerHTML = "Build it with capital or small letters 🧲";
-    card.appendChild(hint);
+    const hint = document.createElement("div"); hint.className = "build-hint";
+    hint.innerHTML = "Build it with capital or small letters 🧲"; card.appendChild(hint);
 
     function playSyllables() {
-      if (busy) return;
-      setBusyAll(true); clearAllTiles();
-      speakSequence(
-        w.syllables.map(sylSay), 0.75,
-        (idx) => tiles.forEach((t, k) => {
-          t.classList.toggle("active", k === idx);
-          if (idx !== -1 && k < idx) t.classList.add("done");
-        }),
-        () => { tiles.forEach(t => t.classList.add("done")); setBusyAll(false); }
-      );
+      if (busy) return; setBusyAll(true); clearAllTiles();
+      speakSequence(w.syllables.map(sylSay), 0.75,
+        (idx) => tiles.forEach((t, k) => { t.classList.toggle("active", k === idx); if (idx !== -1 && k < idx) t.classList.add("done"); }),
+        () => { tiles.forEach(t => t.classList.add("done")); setBusyAll(false); });
     }
     function playWhole() {
-      if (busy) return;
-      setBusyAll(true); clearAllTiles();
+      if (busy) return; setBusyAll(true); clearAllTiles();
       tiles.forEach(t => t.classList.add("active"));
-      speakSequence(
-        [w.say || w.text], 0.85,
-        () => {},
-        () => { tiles.forEach(t => t.classList.remove("active")); setBusyAll(false); }
-      );
+      speakSequence([w.say || w.text], 0.85, () => {}, () => { tiles.forEach(t => t.classList.remove("active")); setBusyAll(false); });
     }
     wordBtn.addEventListener("click", playSyllables);
     sylBtn.addEventListener("click", playSyllables);
     wholeBtn.addEventListener("click", playWhole);
-
     return card;
   }
 
-  // ---- Render the current day ---------------------------------------------
-  const cardsEl = document.getElementById("cards"),
-        progressEl = document.getElementById("progress"),
-        backBtn = document.getElementById("backBtn"),
-        nextBtn = document.getElementById("nextBtn"),
-        resetBtn = document.getElementById("resetBtn");
+  const cardsEl = document.getElementById("cards"), progressEl = document.getElementById("progress");
 
-  function render() {
+  function renderDay(dayIndex) {
+    const day = composeDay(dayIndex);
     if (synth) synth.cancel();
     busy = false; allTiles.length = 0; cardsEl.innerHTML = "";
-
-    const day = DAYS[state.set];
     day.items.forEach(entry => cardsEl.appendChild(makeCard(entry)));
     progressEl.textContent = "Letter " + day.letter + " · Day " + day.part + " of 2";
-
-    backBtn.disabled = (state.set === 0);
-    const isLast = (state.set === NUM_SETS - 1);
-    nextBtn.disabled = isLast;
-    nextBtn.textContent = isLast ? "Done" : "Next ▶";
   }
 
-  function go(delta) {
-    const ns = Math.min(Math.max(state.set + delta, 0), NUM_SETS - 1);
-    if (ns === state.set) return;
-    state.set = ns; state.lastDate = todayStr(); saveState(state); render();
-  }
-  function startOver() {
-    state.set = 0; state.lastDate = todayStr(); saveState(state); render();
+  // ---- Load schedule.json (start date), then show today's words -----------
+  async function loadStartDate() {
+    try {
+      const r = await fetch("schedule.json", { cache: "no-store" });
+      if (r.ok) { const j = await r.json(); if (j && j.startDate) return j.startDate; }
+    } catch (e) {}
+    return todayISO();   // fallback: start today
   }
 
-  backBtn.addEventListener("click", () => go(-1));
-  nextBtn.addEventListener("click", () => go(1));
-  resetBtn.addEventListener("click", startOver);
-
-  if (DAYS.length === 0) {
-    cardsEl.innerHTML = '<section class="card"><p style="font-weight:700;color:#79899B;">Add letters and words in the LETTERS list at the top of this file.</p></section>';
-    document.querySelector(".nav").style.display = "none";
-  } else {
-    render();
-  }
+  (async function init() {
+    if (ALPHABET.length === 0) {
+      cardsEl.innerHTML = '<section class="card"><p style="font-weight:700;color:#79899B;">No words found. Check that words.js loaded.</p></section>';
+      return;
+    }
+    const startISO = await loadStartDate();
+    let dayIndex = dayNumber(startISO);
+    if (isNaN(dayIndex)) dayIndex = 0;
+    dayIndex = Math.min(Math.max(dayIndex, 0), TOTAL_DAYS - 1);  // clamp A..Z
+    renderDay(dayIndex);
+  })();
 </script>
 </body>
 </html>
