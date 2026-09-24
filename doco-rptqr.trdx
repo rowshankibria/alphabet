@@ -1,0 +1,690 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Report xmlns="http://schemas.telerik.com/reporting/2026/2.0" DataSourceName="objectDataSource1" Width="10in" Name="FeederCard">
+  <Style>
+    <Font Size="14pt" />
+  </Style>
+  <DataSources>
+    <ObjectDataSource ParameterValues="null" Name="objectDataSource1">
+      <DataSource>
+        <String>FMS_PDFReportService.Models.Jobs.FmsJob, FMS_PDFReportService.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</String>
+      </DataSource>
+    </ObjectDataSource>
+  </DataSources>
+  <Items>
+    <PageHeaderSection PrintOnFirstPage="False" Height="0.4in" Name="pageHeader">
+      <Items>
+        <TextBox Width="1in" Height="0.24in" Left="0in" Top="0in" Value="= Parameters.FeederName.Value" Name="pgFeederName">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="9pt" Bold="True" />
+            <BorderStyle Default="None" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="0.85in" Height="0.24in" Left="1in" Top="0in" Value="= Parameters.Position.Value" Name="pgPosition">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="9pt" Bold="True" />
+            <BorderStyle Default="None" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="1.05in" Height="0.24in" Left="1.85in" Top="0in" Value="= Parameters.CardClassName.Value" Name="pgCardClass">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="9pt" Bold="True" />
+            <BorderStyle Default="None" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="7.09in" Height="0.24in" Left="2.9in" Top="0in" Value="= Parameters.SubstationName.Value" Name="pgSubstationName">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="9pt" Bold="True" />
+            <BorderStyle Default="None" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+      </Items>
+    </PageHeaderSection>
+    <ReportHeaderSection Height="1.8in" Name="reportHeader">
+      <Items>
+        <TextBox Width="1in" Height="0.24in" Left="0in" Top="0in" Value="= Parameters.FeederName.Value" Name="txtPosition">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="9pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="0.85in" Height="0.24in" Left="1in" Top="0in" Value="= Parameters.Position.Value&#13;&#10;" Name="txtFeederName">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="9pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="1.05in" Height="0.24in" Left="1.85in" Top="0in" Value="= Parameters.CardClassName.Value" Name="txtCardClass">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="9pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="4.9in" Height="0.24in" Left="2.9in" Top="0in" Value="= Parameters.SubstationName.Value" Name="txtSubstationName">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="9pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="2.2in" Height="0.24in" Left="7.8in" Top="0in" Value="Note:" Name="lblNote">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="1in" Height="0.24in" Left="0in" Top="0.24in" Value="Cut Out:" Name="lblCutOut">
+          <Style TextAlign="Right" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="1.9in" Height="0.24in" Left="1in" Top="0.24in" Value="= Parameters.CutOut.Value" Format="{0:MM/dd/yy HH:mm}" Name="txtCutOut">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="1in" Height="0.24in" Left="0in" Top="0.48in" Value="Cut In:" Name="lblCutIn">
+          <Style TextAlign="Right" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="1.9in" Height="0.24in" Left="1in" Top="0.48in" Value="= Parameters.CutIn.Value" Format="{0:MM/dd/yy HH:mm}" Name="txtCutIn">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="1in" Height="0.24in" Left="0in" Top="0.72in" Value="Station Ground:" Name="lblStationGround">
+          <Style TextAlign="Right" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.GroundBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.GroundFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.6in" Height="0.24in" Left="1in" Top="0.72in" Value="= Parameters.StationGround.Value" Name="txtStationGround">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.GroundBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.GroundFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.7in" Height="0.24in" Left="1.6in" Top="0.72in" Value="Grounds:" Name="lblGrounds">
+          <Style TextAlign="Right" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.GroundBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.GroundFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.6in" Height="0.24in" Left="2.3in" Top="0.72in" Value="= Parameters.GroundsOn.Value" Name="txtGroundsOn">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.GroundBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.GroundFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="1in" Height="0.24in" Left="0in" Top="0.96in" Value="Dead Moves:" Name="lblDeadMoves">
+          <Style TextAlign="Right" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.DeadMoveBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.DeadMoveFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.6in" Height="0.24in" Left="1in" Top="0.96in" Value="= Parameters.DeadMoves.Value" Name="txtDeadMoves">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.DeadMoveBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.DeadMoveFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.7in" Height="0.24in" Left="1.6in" Top="0.96in" Value="Taken Out:" Name="lblTakenOut">
+          <Style TextAlign="Right" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.TakeOutBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.TakeOutFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.6in" Height="0.24in" Left="2.3in" Top="0.96in" Value="= Parameters.DeadMovesTO.Value" Name="txtDeadMovesTO">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.TakeOutBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.TakeOutFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="4.9in" Height="0.18in" Left="2.9in" Top="0.24in" Value="= Parameters.Loop1.Value" Name="txtLoop1">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Left="Solid" Right="Solid" />
+            <BorderWidth Left="0.5pt" Right="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="4.9in" Height="0.18in" Left="2.9in" Top="0.42in" Value="= Parameters.Loop2.Value" Name="txtLoop2">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Left="Solid" Right="Solid" />
+            <BorderWidth Left="0.5pt" Right="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="4.9in" Height="0.36in" Left="2.9in" Top="0.6in" Value="= Parameters.Loop3.Value" CanGrow="True" Name="txtLoop3">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Left="Solid" Right="Solid" />
+            <BorderWidth Left="0.5pt" Right="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="4.9in" Height="0.18in" Left="2.9in" Top="0.96in" Value="= Parameters.Loop4.Value" Name="txtLoop4">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Left="Solid" Right="Solid" />
+            <BorderWidth Left="0.5pt" Right="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="4.9in" Height="0.3in" Left="2.9in" Top="1.2in" Value="= Parameters.Assoc.Value" CanGrow="True" Name="txtAssoc">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="2.2in" Height="1.26in" Left="7.8in" Top="0.24in" Value="= Parameters.NoteText.Value" CanGrow="True" Name="txtNote">
+          <Style VerticalAlign="Top">
+            <Font Name="Arial" Size="8pt" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="2.9in" Height="0.3in" Left="0in" Top="1.2in" Value="" Name="textBox1">
+          <Style TextAlign="Right" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" Bold="True" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+        </TextBox>
+      </Items>
+    </ReportHeaderSection>
+    <DetailSection Height="0.34in" Name="detailSection">
+      <Items>
+        <TextBox Width="9.99in" Height="0.34in" Left="0in" Top="0in" Value="= Fields.TOMove" Name="txtHeadingMain">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" Bold="True" />
+            <BorderStyle Bottom="Solid" Left="Solid" Right="Solid" />
+            <BorderWidth Bottom="0.5pt" Left="0.5pt" Right="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass = 0 AND Fields.MoveFGColor = 8" />
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.StepHeadBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.StepHeadFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="9.99in" Height="0.34in" Left="0in" Top="0in" Value="= Fields.TOMove" Name="txtHeadingNote">
+          <Style TextAlign="Left" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Bottom="Solid" Left="Solid" Right="Solid" />
+            <BorderWidth Bottom="0.5pt" Left="0.5pt" Right="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass = 0 AND Fields.MoveFGColor &lt;&gt; 8" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.35in" Height="0.34in" Left="0in" Top="0in" Value="= Fields.TOOperator" Name="txtTOOp">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.75in" Height="0.34in" Left="0.35in" Top="0in" Value="= IIf(Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOIssued) = &quot;12/31 23:59&quot;, &quot;&quot;, Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOIssued))" Name="txtTOIssued">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= IIf(Fields.ActivityIdentifier = &quot;N&quot; Or (Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOIssued) = &quot;12/31 23:59&quot; Or Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOIssued) = &quot;&quot;), Parameters.GrayOutBg.Value, Parameters.JobBg.Value)" />
+            <Binding Path="Style.Color" Expression="= IIf(Fields.ActivityIdentifier = &quot;N&quot; Or (Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOIssued) = &quot;12/31 23:59&quot; Or Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOIssued) = &quot;&quot;), Parameters.GrayOutFg.Value, Parameters.JobFg.Value)" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.75in" Height="0.34in" Left="1.1in" Top="0in" Value="= IIf(Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOComplete) = &quot;12/31 23:59&quot;, &quot;&quot;, Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOComplete))" Name="txtTOComplete">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= IIf(Fields.ActivityIdentifier = &quot;N&quot; Or (Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOComplete) = &quot;12/31 23:59&quot; Or Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOComplete) = &quot;&quot;), Parameters.GrayOutBg.Value, Parameters.JobBg.Value)" />
+            <Binding Path="Style.Color" Expression="= IIf(Fields.ActivityIdentifier = &quot;N&quot; Or (Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOComplete) = &quot;12/31 23:59&quot; Or Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.TOComplete) = &quot;&quot;), Parameters.GrayOutFg.Value, Parameters.JobFg.Value)" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.35in" Height="0.34in" Left="1.85in" Top="0in" Value="= Fields.PrintID" Name="txtID">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.JobBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.JobFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.85in" Height="0.34in" Left="2.2in" Top="0in" Value="= Fields.EquipClassName" Name="txtType">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.JobBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.JobFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.8in" Height="0.34in" Left="3.05in" Top="0in" Value="= Fields.EquipName" Name="txtEquip">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.JobBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.JobFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.25in" Height="0.34in" Left="3.85in" Top="0in" Value="= Fields.Grounds" Name="txtG">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= IIf(Not (Fields.MoveType = &quot;Dead&quot;) And (Fields.Grounds &gt; 0 And Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.GroundOn) &lt;&gt; &quot;12/31 23:59&quot; And Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.GroundOn) &lt;&gt; &quot;&quot;), Parameters.GroundBg.Value, Parameters.JobBg.Value)" />
+            <Binding Path="Style.Color" Expression="= IIf(Not (Fields.MoveType = &quot;Dead&quot;) And (Fields.Grounds &gt; 0 And Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.GroundOn) &lt;&gt; &quot;12/31 23:59&quot; And Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.GroundOn) &lt;&gt; &quot;&quot;), Parameters.GroundFg.Value, Parameters.JobFg.Value)" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="2.75in" Height="0.34in" Left="4.1in" Top="0in" Value="= Fields.TOMove" CanGrow="True" Name="txtMove">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= IIf(Fields.MoveType = &quot;Dead&quot;, Parameters.DeadMoveBg.Value, IIf(Fields.Grounds &gt; 0 And Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.GroundOn) &lt;&gt; &quot;12/31 23:59&quot; And Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.GroundOn) &lt;&gt; &quot;&quot;, Parameters.GroundBg.Value, Parameters.JobBg.Value))" />
+            <Binding Path="Style.Color" Expression="= IIf(Fields.MoveType = &quot;Dead&quot;, Parameters.DeadMoveFg.Value, IIf(Fields.Grounds &gt; 0 And Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.GroundOn) &lt;&gt; &quot;12/31 23:59&quot; And Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.GroundOn) &lt;&gt; &quot;&quot;, Parameters.GroundFg.Value, IIf(Fields.MoveCategory = 2, Parameters.SwitchingFg.Value, Parameters.JobFg.Value)))" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.25in" Height="0.34in" Left="6.85in" Top="0in" Value="= IIf(Fields.MoveBGColor = 6 Or Fields.MoveBGColor = 26, Fields.ActivityIdentifier, IIf(Fields.ActivityIdentifier = &quot;S&quot; And Parameters.ArchFlag.Value &lt;&gt; 0, &quot;&quot;, Fields.ActivityIdentifier))" Name="txtAct">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= IIf(Fields.MoveBGColor = 6, Parameters.PhaseCheckBg.Value, IIf(Fields.MoveBGColor = 26, Parameters.AltPhaseCheckBg.Value, IIf(Fields.ActivityIdentifier = &quot;N&quot;, Parameters.GrayOutBg.Value, Parameters.JobBg.Value)))" />
+            <Binding Path="Style.Color" Expression="= IIf(Fields.MoveBGColor = 6, Parameters.PhaseCheckFg.Value, IIf(Fields.MoveBGColor = 26, Parameters.AltPhaseCheckFg.Value, IIf(Fields.ActivityIdentifier = &quot;N&quot;, Parameters.GrayOutFg.Value, Parameters.JobFg.Value)))" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="1.1in" Height="0.34in" Left="7.1in" Top="0in" Value="= Fields.Response" CanGrow="True" Name="txtResponse">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= Parameters.JobBg.Value" />
+            <Binding Path="Style.Color" Expression="= Parameters.JobFg.Value" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.35in" Height="0.34in" Left="8.2in" Top="0in" Value="= Fields.RSOperator" Name="txtRSOp">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.72in" Height="0.34in" Left="8.55in" Top="0in" Value="= IIf(Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSIssued) = &quot;12/31 23:59&quot;, &quot;&quot;, Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSIssued))" Name="txtRSIssued">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= IIf(Fields.ActivityIdentifier = &quot;N&quot; Or (Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSIssued) = &quot;12/31 23:59&quot; Or Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSIssued) = &quot;&quot;), Parameters.GrayOutBg.Value, Parameters.JobBg.Value)" />
+            <Binding Path="Style.Color" Expression="= IIf(Fields.ActivityIdentifier = &quot;N&quot; Or (Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSIssued) = &quot;12/31 23:59&quot; Or Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSIssued) = &quot;&quot;), Parameters.GrayOutFg.Value, Parameters.JobFg.Value)" />
+          </Bindings>
+        </TextBox>
+        <TextBox Width="0.72in" Height="0.34in" Left="9.27in" Top="0in" Value="= IIf(Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSComplete) = &quot;12/31 23:59&quot;, &quot;&quot;, Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSComplete))" Name="txtRSComplete">
+          <Style TextAlign="Center" VerticalAlign="Middle">
+            <Font Name="Arial" Size="10px" />
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="0.5pt" />
+          </Style>
+          <Bindings>
+            <Binding Path="Visible" Expression="= Fields.JobClass &lt;&gt; 0" />
+            <Binding Path="Style.BackgroundColor" Expression="= IIf(Fields.ActivityIdentifier = &quot;N&quot; Or (Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSComplete) = &quot;12/31 23:59&quot; Or Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSComplete) = &quot;&quot;), Parameters.GrayOutBg.Value, Parameters.JobBg.Value)" />
+            <Binding Path="Style.Color" Expression="= IIf(Fields.ActivityIdentifier = &quot;N&quot; Or (Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSComplete) = &quot;12/31 23:59&quot; Or Format(&quot;{0:MM/dd HH:mm}&quot;, Fields.RSComplete) = &quot;&quot;), Parameters.GrayOutFg.Value, Parameters.JobFg.Value)" />
+          </Bindings>
+        </TextBox>
+      </Items>
+    </DetailSection>
+    <PageFooterSection Height="0.3in" Name="pageFooter">
+      <Items>
+        <TextBox Width="4in" Height="0.2in" Left="0in" Top="0.05in" Value="=Now()" Format="{0:MM/dd/yyyy HH:mm}" Name="txtPrintTime">
+          <Style VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="2.5in" Height="0.2in" Left="7.5in" Top="0.05in" Value="='Page ' + PageNumber + ' of ' + PageCount" Name="txtPageNum">
+          <Style TextAlign="Right" VerticalAlign="Middle">
+            <Font Name="Arial" Size="8pt" />
+          </Style>
+        </TextBox>
+      </Items>
+    </PageFooterSection>
+  </Items>
+  <PageSettings PaperKind="Letter" Landscape="True" ColumnCount="1" ColumnSpacing="0in">
+    <Margins>
+      <MarginsU Left="0.5in" Right="0.5in" Top="0.5in" Bottom="0.5in" />
+    </Margins>
+  </PageSettings>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <Groups>
+    <Group Name="grpColumns">
+      <GroupHeader>
+        <GroupHeaderSection PrintOnEveryPage="True" Height="0.36in" Name="columnHeader">
+          <Items>
+            <TextBox Width="1.85in" Height="0.18in" Left="0in" Top="0in" Value="Take Out" Name="hdrTakeOut">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.35in" Height="0.36in" Left="1.85in" Top="0in" Value="ID" Name="hdrID">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.85in" Height="0.36in" Left="2.2in" Top="0in" Value="Type" Name="hdrType">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.8in" Height="0.36in" Left="3.05in" Top="0in" Value="Equipment" Name="hdrEquip">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.25in" Height="0.36in" Left="3.85in" Top="0in" Value="G" Name="hdrG">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="2.75in" Height="0.36in" Left="4.1in" Top="0in" Value="Move" Name="hdrMove">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.25in" Height="0.36in" Left="6.85in" Top="0in" Value="" Name="hdrAct">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="1.1in" Height="0.36in" Left="7.1in" Top="0in" Value="Response" Name="hdrResponse">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="1.79in" Height="0.18in" Left="8.2in" Top="0in" Value="Restore" Name="hdrRestore">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.35in" Height="0.18in" Left="0in" Top="0.18in" Value="Op" Name="hdrTOOp">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.75in" Height="0.18in" Left="0.35in" Top="0.18in" Value="Issued" Name="hdrTOIssued">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.75in" Height="0.18in" Left="1.1in" Top="0.18in" Value="Complete" Name="hdrTOComplete">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.35in" Height="0.18in" Left="8.2in" Top="0.18in" Value="Op" Name="hdrRSOp">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.72in" Height="0.18in" Left="8.55in" Top="0.18in" Value="Issued" Name="hdrRSIssued">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.72in" Height="0.18in" Left="9.27in" Top="0.18in" Value="Complete" Name="hdrRSComplete">
+              <Style TextAlign="Center" VerticalAlign="Middle">
+                <Font Name="Arial" Size="7pt" Bold="True" />
+                <BorderStyle Default="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+            </TextBox>
+          </Items>
+        </GroupHeaderSection>
+      </GroupHeader>
+      <GroupFooter>
+        <GroupFooterSection Height="0.01in" Name="columnFooter">
+          <Style Visible="False" />
+        </GroupFooterSection>
+      </GroupFooter>
+      <Groupings>
+        <Grouping Expression="=1" />
+      </Groupings>
+    </Group>
+  </Groups>
+  <ReportParameters>
+    <ReportParameter Name="Position" AllowNull="True" />
+    <ReportParameter Name="FeederName" AllowNull="True" />
+    <ReportParameter Name="CardClassName" AllowNull="True" />
+    <ReportParameter Name="SubstationName" AllowNull="True" />
+    <ReportParameter Name="CutOut" Type="DateTime" AllowNull="True" />
+    <ReportParameter Name="CutIn" Type="DateTime" AllowNull="True" />
+    <ReportParameter Name="StationGround" AllowNull="True" />
+    <ReportParameter Name="GroundsOn" Type="Integer" AllowNull="True" />
+    <ReportParameter Name="DeadMoves" Type="Integer" AllowNull="True" />
+    <ReportParameter Name="DeadMovesTO" Type="Integer" AllowNull="True" />
+    <ReportParameter Name="Loop1" AllowNull="True" />
+    <ReportParameter Name="Loop2" AllowNull="True" />
+    <ReportParameter Name="Loop3" AllowNull="True" />
+    <ReportParameter Name="Loop4" AllowNull="True" />
+    <ReportParameter Name="Assoc" AllowNull="True" />
+    <ReportParameter Name="NoteText" AllowNull="True" />
+    <ReportParameter Name="JobBg">
+      <Value>
+        <String>#ffffff</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="JobFg">
+      <Value>
+        <String>#000000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="GrayOutBg">
+      <Value>
+        <String>#808080</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="GrayOutFg">
+      <Value>
+        <String>#000000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="StepHeadBg">
+      <Value>
+        <String>#ffffff</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="StepHeadFg">
+      <Value>
+        <String>#000080</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="DeadMoveBg">
+      <Value>
+        <String>#ffffff</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="DeadMoveFg">
+      <Value>
+        <String>#000000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="GroundBg">
+      <Value>
+        <String>#ffffff</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="GroundFg">
+      <Value>
+        <String>#ff0000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="PhaseCheckBg">
+      <Value>
+        <String>#ff0000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="PhaseCheckFg">
+      <Value>
+        <String>#000000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="AltPhaseCheckBg">
+      <Value>
+        <String>#ffc0c0</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="AltPhaseCheckFg">
+      <Value>
+        <String>#000000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="SwitchingFg">
+      <Value>
+        <String>#008000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="TakeOutBg">
+      <Value>
+        <String>#ffffff</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="TakeOutFg">
+      <Value>
+        <String>#000000</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="ArchFlag" Type="Integer">
+      <Value>
+        <String>0</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
+</Report>
