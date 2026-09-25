@@ -1,0 +1,416 @@
+.ScreenBKG {
+    background-color: lightgrey;
+    margin: 0px
+}
+
+.Page {
+    position: relative;
+    margin: 0px auto 0px auto;
+    background-color: lightgrey;
+}
+
+.ProdDB {
+    font-size: 18pt;
+    color: white;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.OffDB {
+    font-size: 18pt;
+    color: yellow;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.PageHead {
+    font-size: 18pt;
+    font-weight: bold;
+    color: navy;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.FMSCard {
+    background-color: #f9e68c;
+    margin: 0px;
+}
+
+.FMS4KV {
+    background-color: #ffffff
+}
+
+.TOMSCard {
+    background-color: #fafad2;
+    margin: 0px;
+}
+
+.TLSCard {
+    background-color: #e6e6fa;
+    margin: 0px;
+}
+
+.Banner {
+    font-weight: bold;
+    font-size: 12pt;
+    color: navy;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: #fafad2
+}
+
+.Title {
+    font-weight: bold;
+    font-size: 10pt;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.TitleBlock {
+    font-weight: bold;
+    font-size: 10pt;
+    color: white;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: navy
+}
+
+.HiLite {
+    font-size: 10pt;
+    color: white;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: #8c9299;
+}
+
+.HiLite2 {
+    color: black;
+    background-color: #f9e68c
+}
+
+.DelayHiLite {
+    font-weight: bold;
+    font-size: 10pt;
+    color: white;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: green
+}
+
+.CardHead {
+    font-weight: bold;
+    font-size: 12pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: lightskyblue
+}
+
+.Head_Reverse {
+    font-weight: bold;
+    font-size: 12pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    color: #ffffff;
+    background-color: black;
+}
+
+.CardField {
+    font-weight: bold;
+    font-size: 12pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+}
+
+.TblTitle {
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: Arial, 'MS Sans Serif', Verdana;
+    BACKGROUND-COLOR: lightskyblue;
+}
+
+.TblTitle_Gray {
+    font-weight: bold;
+    font-size: 10pt;
+    color: gray;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: #dee2e6;
+}
+
+.TblTitle_Small {
+    font-weight: bold;
+    font-size: 9pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: #dee2e6;
+}
+
+.Job {
+    font-weight: normal;
+    font-size: 10pt;
+    color: black;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.Job_Lite {
+    font-size: 10pt;
+    color: black;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.Job_Gray {
+    font-weight: bold;
+    font-size: 10pt;
+    color: gray;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.Job_SOA {
+    font-weight: normal;
+    font-size: 10pt;
+}
+
+.Job_Reverse {
+    background-color: black;
+    font-weight: bold;
+    font-size: 10pt;
+    color: #ffffff;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.SW {
+    font-weight: bold;
+    font-size: 10pt;
+    color: black;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: lightgreen;
+}
+
+.Info {
+    font-weight: bold;
+    font-size: 10pt;
+    color: black;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: khaki;
+}
+
+.Info_1 {
+    font-weight: bold;
+    font-size: 10pt;
+    color: black;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: yellow
+}
+
+.Info_2 {
+    font-weight: bold;
+    font-size: 10pt;
+    color: black;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: darkturquoise
+}
+
+.Info_3 {
+    font-weight: bold;
+    font-size: 10pt;
+    color: black;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: mediumseagreen
+}
+
+.DeadMove {
+    font-weight: bold;
+    font-size: 10pt;
+    color: green;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.Ground {
+    font-weight: bold;
+    font-size: 10pt;
+    color: red;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.TakeOut {
+    font-weight: bold;
+    font-size: 10pt;
+    color: green;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.StepHead {
+    paddingG-left: 2px;
+    font-weight: bold;
+    font-size: 10pt;
+    color: blue;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.PhaseCheck {
+    font-weight: bold;
+    font-size: 10pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: red
+}
+
+.AltPhaseCheck {
+    font-weight: bold;
+    font-size: 10pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: pink
+}
+
+.GrayOut {
+    background-color: silver
+}
+
+.Label {
+    font-weight: bold;
+    font-size: 10pt;
+    cursor: default;
+    color: black;
+    line-height: 150%;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    text-align: right
+}
+
+.ReqLabel {
+    font-weight: bold;
+    font-size: 10pt;
+    cursor: default;
+    color: blue;
+    line-height: 150%;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    text-align: right
+}
+
+.MaxLenLabel {
+    font-weight: normal;
+    font-size: 8pt;
+    cursor: default;
+    color: green;
+    line-height: 120%;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    text-align: right
+}
+
+.WorkPermit {
+    font-weight: bold;
+    font-size: 10pt;
+    color: blue;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+    background-color: #ffffff
+}
+
+.WPP {
+    font-weight: bold;
+    font-size: 10pt;
+    color: black;
+    font-family: Arial, 'MS Sans Serif', Verdana
+}
+
+.ESTCutIn {
+    color: deepskyblue
+}
+
+.Abnormal {
+    color: black;
+    background-color: yellow
+}
+
+.ISWP {
+    color: white;
+    background-color: navy
+}
+
+.OSWP {
+    color: black;
+    background-color: lightgreen
+}
+
+.Order {
+    font-size: 12pt;
+    font-weight: normal;
+    font-family: webdings;
+}
+
+.Door {
+    font-size: 14pt;
+    font-weight: normal;
+    font-family: webdings;
+}
+
+.Curtain {
+    font-size: 18pt;
+    font-weight: normal;
+    font-family: webdings;
+}
+
+.TblLiteBdr {
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+    .TblLiteBdr td {
+        border-right: 1px solid #ffffff;
+        border-bottom: 1px solid #ffffff;
+    }
+
+.Size1 {
+    font-weight: normal;
+    font-size: 8pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+}
+
+.Size2 {
+    font-weight: bold;
+    font-size: 10pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+}
+
+.Size3 {
+    font-weight: normal;
+    font-size: 12pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+}
+
+.Size4 {
+    font-weight: normal;
+    font-size: 14pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+}
+
+.Greenie {
+    color: green;
+    font-weight: normal;
+    font-size: 8pt;
+    font-family: Arial, 'MS Sans Serif', Verdana;
+}
+
+.HLine {
+    border-top: thin groove;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-left: 0px;
+}
+
+.FixCell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* override css in jquery-ui.min.css  (dialogClass: "no-close")*/
+.ui-dialog .ui-dialog-titlebar {
+    padding: 0em 1em;
+    position: relative
+}
+
+.ui-dialog-titlebar-close {
+    display: none;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+    margin-top: 0.1em;
+    padding: 0em 1em 0em 0.4em
+}
+
+.ui-dialog-buttonset, .ui-button {
+    padding: 0.1em 1em;
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+    font-size: small;
+    margin: 0;
+}
