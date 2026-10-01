@@ -1,3 +1,0 @@
-Op need to empty,
-PADMNT N value should not background gray 
-but red can be 
